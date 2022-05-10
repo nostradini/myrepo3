@@ -5,3 +5,4 @@ Test for com com
 Feat: added
 fix: handled concern
 fix: trigger wf
+feat: added permissions
