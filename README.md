@@ -7,3 +7,4 @@ fix: handled concern
 fix: trigger wf
 feat: added permissions
 fix: something woring appeared
+test: chck this one out
