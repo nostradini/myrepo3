@@ -1,5 +1,10 @@
 
 
+## [v0.1.4] - 2022-05-11
+### :sparkles: New Features
+- [`0e2eacb`](https://github.com/nostradini/myrepo3/commit/0e2eacbe9d448c45a75433a24e5c647ad406f53a) - Some cleanup and applied branch rule *(commit by [@nostradini](https://github.com/nostradini))*
+
+
 ## [v0.1.3] - 2022-05-11
 ### :bug: Bug Fixes
 - [`43eb928`](https://github.com/nostradini/myrepo3/commit/43eb928005913e62ef7894a1f5512a5966232663) - breaking and build seemed to not work *(commit by [@nostradini](https://github.com/nostradini))*
@@ -45,3 +50,4 @@
 [v0.1.1]: https://github.com/nostradini/myrepo3/compare/v0.1.0...v0.1.1
 [v0.1.2]: https://github.com/nostradini/myrepo3/compare/v0.1.1...v0.1.2
 [v0.1.3]: https://github.com/nostradini/myrepo3/compare/v0.1.2...v0.1.3
+[v0.1.4]: https://github.com/nostradini/myrepo3/compare/v0.1.3...v0.1.4
