@@ -1,5 +1,10 @@
 
 
+## [v0.1.3] - 2022-05-11
+### :bug: Bug Fixes
+- [`43eb928`](https://github.com/nostradini/myrepo3/commit/43eb928005913e62ef7894a1f5512a5966232663) - breaking and build seemed to not work *(commit by [@nostradini](https://github.com/nostradini))*
+
+
 ## [v0.1.2] - 2022-05-11
 ### :zap: Performance Improvements
 - [`1816846`](https://github.com/nostradini/myrepo3/commit/1816846a22ff3b6463de2d9ac523410845893619) - check on performance *(commit by [@nostradini](https://github.com/nostradini))*
@@ -39,3 +44,4 @@
 [v0.1.0]: https://github.com/nostradini/myrepo3/compare/v0.0.11...v0.1.0
 [v0.1.1]: https://github.com/nostradini/myrepo3/compare/v0.1.0...v0.1.1
 [v0.1.2]: https://github.com/nostradini/myrepo3/compare/v0.1.1...v0.1.2
+[v0.1.3]: https://github.com/nostradini/myrepo3/compare/v0.1.2...v0.1.3
