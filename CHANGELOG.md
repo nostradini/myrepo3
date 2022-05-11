@@ -1,5 +1,10 @@
 
 
+## [v0.1.2] - 2022-05-11
+### :zap: Performance Improvements
+- [`1816846`](https://github.com/nostradini/myrepo3/commit/1816846a22ff3b6463de2d9ac523410845893619) - check on performance *(commit by [@nostradini](https://github.com/nostradini))*
+
+
 ## [v0.1.1] - 2022-05-11
 ### :sparkles: New Features
 - [`54a9488`](https://github.com/nostradini/myrepo3/commit/54a9488f80e1e73dc197c12e57a4bed9b11d46e0) - sample change *(commit by [@nostradini](https://github.com/nostradini))*
@@ -33,3 +38,4 @@
 [v0.0.11]: https://github.com/nostradini/myrepo3/compare/v0.0.10...v0.0.11
 [v0.1.0]: https://github.com/nostradini/myrepo3/compare/v0.0.11...v0.1.0
 [v0.1.1]: https://github.com/nostradini/myrepo3/compare/v0.1.0...v0.1.1
+[v0.1.2]: https://github.com/nostradini/myrepo3/compare/v0.1.1...v0.1.2
