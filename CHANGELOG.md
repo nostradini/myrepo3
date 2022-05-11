@@ -1,5 +1,10 @@
 
 
+## [v0.1.1] - 2022-05-11
+### :sparkles: New Features
+- [`54a9488`](https://github.com/nostradini/myrepo3/commit/54a9488f80e1e73dc197c12e57a4bed9b11d46e0) - sample change *(commit by [@nostradini](https://github.com/nostradini))*
+
+
 ## [v0.1.0] - 2022-05-10
 ### :sparkles: New Features
 - [`1bb10c0`](https://github.com/nostradini/myrepo3/commit/1bb10c0a249d542864e5348c9bc0ee54f75a5e3a) - test1 for multiple commits *(commit by [@nostradini](https://github.com/nostradini))*
@@ -27,3 +32,4 @@
 [v0.0.10]: https://github.com/nostradini/myrepo3/compare/v0.0.9...v0.0.10
 [v0.0.11]: https://github.com/nostradini/myrepo3/compare/v0.0.10...v0.0.11
 [v0.1.0]: https://github.com/nostradini/myrepo3/compare/v0.0.11...v0.1.0
+[v0.1.1]: https://github.com/nostradini/myrepo3/compare/v0.1.0...v0.1.1
