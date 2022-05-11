@@ -1,5 +1,10 @@
 
 
+## [v0.1.5] - 2022-05-11
+### :bug: Bug Fixes
+- [`ac12a9e`](https://github.com/nostradini/myrepo3/commit/ac12a9e73b004417c9131f0e2df2007843016e35) - Checking action permissions *(commit by [@nostradini](https://github.com/nostradini))*
+
+
 ## [v0.1.4] - 2022-05-11
 ### :sparkles: New Features
 - [`0e2eacb`](https://github.com/nostradini/myrepo3/commit/0e2eacbe9d448c45a75433a24e5c647ad406f53a) - Some cleanup and applied branch rule *(commit by [@nostradini](https://github.com/nostradini))*
@@ -51,3 +56,4 @@
 [v0.1.2]: https://github.com/nostradini/myrepo3/compare/v0.1.1...v0.1.2
 [v0.1.3]: https://github.com/nostradini/myrepo3/compare/v0.1.2...v0.1.3
 [v0.1.4]: https://github.com/nostradini/myrepo3/compare/v0.1.3...v0.1.4
+[v0.1.5]: https://github.com/nostradini/myrepo3/compare/v0.1.4...v0.1.5
