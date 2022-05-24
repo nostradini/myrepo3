@@ -5,7 +5,7 @@ VERSION="0.2.1"
 DRAFT="false"
 PRE="false"
 BRANCH="main"
-GITHUB_ACCESS_TOKEN=$1
+ACCESS_TOKEN=$1
 
 # get repon name and owner
 # CD /myrepo3
@@ -43,5 +43,5 @@ fi
 
 
 API_JSON=$(printf '{"tag_name": "v%s","target_commitish": "%s","name": "v%s","body": "%s","draft": %s,"prerelease": %s}' "$VERSION" "$BRANCH" "$VERSION" "$MESSAGE" "$DRAFT" "$PRE" )
-API_RESPONSE_STATUS=$(curl -H "Authorization: token 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" --data "$API_JSON" -s -i https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/releases?access_token=$GITHUB_ACCESS_TOKEN)
+API_RESPONSE_STATUS=$(curl -H "Authorization: token $ACCESS_TOKEN" --data "$API_JSON" -s -i https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/releases?access_token=$ACCESS_TOKEN)
 echo "$API_RESPONSE_STATUS"
