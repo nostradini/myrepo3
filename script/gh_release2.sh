@@ -1,6 +1,5 @@
 
 !/usr/bin/bash
-# UpdatedVer=$(cat ./VERSION)
 user="nostradini"
 repo="myrepo3"
 token=$1
