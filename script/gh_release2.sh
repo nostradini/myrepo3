@@ -1,8 +1,8 @@
 
 #!/usr/bin/bash
 
-user="nostradini"
-repo="myrepo3"
+user='nostradini'
+repo='myrepo3'
 token=$1
 tag=$2
 
@@ -21,6 +21,6 @@ else
     cat release.json
     echo "command:"
     echo $command
-    return 1
+    # return 1
 fi
 
