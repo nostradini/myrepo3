@@ -16,7 +16,7 @@ if [ -z $REPO_REMOTE ]; then
 	exit 1
 fi
 
-REPO_NAME=$(basename -s .git $REPO_REMOTE)
+REPO_NAME="myrepo3"	#$(basename -s .git $REPO_REMOTE)
 REPO_OWNER=$(git config --get user.name)
 
 # get args
