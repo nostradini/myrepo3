@@ -16,9 +16,9 @@ jobs:
       uses: actions/checkout@v3
     - name: Getting Version
       run: |
-      ver_str=$(cat "VERSION")
-      ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
-      echo "Version string is $ver_extract_str"
+       ver_str=$(cat "VERSION")
+       ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
+       echo "Version string is $ver_extract_str"
 
     - name: Call SH
       run: |
