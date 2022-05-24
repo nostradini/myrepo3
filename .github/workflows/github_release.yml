@@ -23,4 +23,4 @@ jobs:
     - name: Call SH
       run: |
         chmod +x ./script/gh_release2.sh
-        ./script/gh_release2.sh $ENV_TOKEN $ver_extract_str
+        ./script/gh_release2.sh $ENV_TOKEN "$ver_extract_str"

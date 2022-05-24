@@ -5,7 +5,7 @@ repo="myrepo3"
 token=$1
 tag=$2
 
-echo $tag
+echo "tag" $tag
 vtag="v$tag"
 tag=\"${tag}\"
 vtag=\"${vtag}\"
