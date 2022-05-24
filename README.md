@@ -1,3 +1,3 @@
 MYREPO3
 cleanup
-repos for sh 2
+repos for sh 3
