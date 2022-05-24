@@ -22,3 +22,4 @@ create_release() {
         return 1
     fi
 }
+create_release()
