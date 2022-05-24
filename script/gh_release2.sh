@@ -1,10 +1,15 @@
 
 #!/usr/bin/bash
-
+UpdatedVer=$(cat ./VERSION)
 user='nostradini'
 repo='myrepo3'
 token=$1
 tag=$2
+
+vtag="v$tag"
+tag=\"${tag}\"
+vtag=\"${vtag}\"
+echo $tag $vtag
 
 curl \
 -X POST \
