@@ -7,12 +7,12 @@ on:
 env:
   ENV_TOKEN: ${{ secrets.ACCESS_PAT }}
 jobs:
-  deploy:
+  GH Release:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
       - name: Checkout Code
+        uses: actions/checkout@v3
 
       - name: Call SH
         run: |
