@@ -8,7 +8,7 @@ tag=$2
 
 command="curl -s -o release.json -w '%{http_code}' \
          --request POST \
-         --header 'authorization: Bearer ${token}' \
+         --header 'authorization: token $token' \
          --header 'content-type: application/json' \
          --data '{"tag_name": "${tag}"}' \
          https://api.github.com/repos/$user/$repo/releases"
