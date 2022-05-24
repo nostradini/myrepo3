@@ -1,13 +1,14 @@
 #!/bin/bash
 
 MESSAGE="0"
-VERSION="0"
+VERSION="0.2.0"
 DRAFT="false"
 PRE="false"
-BRANCH="master"
-GITHUB_ACCESS_TOKEN="<YOUR_ACCESS_TOKEN>"
+BRANCH="main"
+GITHUB_ACCESS_TOKEN=$1
 
 # get repon name and owner
+CD /myrepo3
 REPO_REMOTE=$(git config --get remote.origin.url)
 
 if [ -z $REPO_REMOTE ]; then
