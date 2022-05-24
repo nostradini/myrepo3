@@ -8,7 +8,7 @@ BRANCH="main"
 GITHUB_ACCESS_TOKEN=$1
 
 # get repon name and owner
-CD /myrepo3
+# CD /myrepo3
 REPO_REMOTE=$(git config --get remote.origin.url)
 
 if [ -z $REPO_REMOTE ]; then
