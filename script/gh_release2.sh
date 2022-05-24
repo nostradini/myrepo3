@@ -37,4 +37,3 @@ https://api.github.com/repos/$user/$repo/releases  \
 #     echo $command
 #     # return 1
 # fi
-
