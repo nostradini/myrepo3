@@ -18,4 +18,4 @@ jobs:
     - name: Call SH
       run: |
         chmod +x ./script/gh_release2.sh
-        ./script/gh_release2.sh $ENV_TOKEN "0.2.1"
+        ./script/gh_release2.sh $ENV_TOKEN 0.2.2
