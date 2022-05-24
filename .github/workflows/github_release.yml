@@ -7,7 +7,7 @@ on:
       - 'README.md'
   # workflow_dispatch:
 env:
-  ENV_TOKEN: ${{ secrets.ACCESS_PAT }}
+  ENV_TOKEN: ${{ secrets.NOTHING }}
 jobs:
  GH_Release:
   runs-on: ubuntu-latest
