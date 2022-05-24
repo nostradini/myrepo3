@@ -5,14 +5,15 @@ on:
   #   branches: [main]
   workflow_dispatch:
 env:
-  ENV_TOKEN: ${{ secrets.SECRET_TOKEN }}
+  ENV_TOKEN: ${{ secrets.ACCESS_PAT }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
       - name: Checkout Code
-        uses: actions/checkout@v3
+
       - name: Call SH
         run: |
         chmod +x ./script/gh_release.sh
