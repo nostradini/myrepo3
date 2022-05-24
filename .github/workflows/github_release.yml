@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'README.md'
-  # workflow_dispatch:
+      - 'VERSION'
+
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
 jobs:
