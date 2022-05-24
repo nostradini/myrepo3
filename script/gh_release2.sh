@@ -3,7 +3,7 @@
 
 user='nostradini'
 repo='myrepo3'
-token=$1
+token=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
 tag=$2
 
 curl \
