@@ -1,10 +1,11 @@
 
 !/usr/bin/bash
-user="nostradini"
+user=$(git config --get user.name)
 repo="myrepo3"
 token=$1
 tag=$2
 
+echo $tag
 vtag="v$tag"
 tag=\"${tag}\"
 vtag=\"${vtag}\"
