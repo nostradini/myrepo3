@@ -1,8 +1,8 @@
 name: Create GH Release
 
 on:
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
   workflow_dispatch:
 env:
   ENV_TOKEN: ${{ secrets.ACCESS_PAT }}
