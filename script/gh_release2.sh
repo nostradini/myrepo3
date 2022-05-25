@@ -1,6 +1,6 @@
 
 !/usr/bin/bash
-user=$(git config --get user.name)
+user="nostradini"
 repo="myrepo3"
 token=$1
 tag=$2
