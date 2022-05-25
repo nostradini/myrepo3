@@ -7,7 +7,7 @@ token=$1
 # tag=$2
 
 tag=$sh_ver
-echo "sh version= " $sh_ver
+echo "sh version= " $gh_sh_ver
 echo "release gitmoji= " $ENV_GM
 
 echo "user= " $user
