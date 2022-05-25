@@ -90,7 +90,7 @@ jobs:
           newver_extract="$(cut -d' ' -f2 <<< "$newver_extract")" 
           echo "New Version = " $newver_extract
           echo "newver_extract=${newver_extract}" >> $GITHUB_ENV
-       echo "new env version " $newver_extract
+          echo "new env version " $newver_extract
 
        chmod +x ./script/gh_release.sh
        ./script/gh_release.sh $ENV_TOKEN $newver_extract
