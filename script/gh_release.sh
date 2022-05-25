@@ -8,6 +8,7 @@ token=$1
 tag=$2
 
 echo "release gitmoji= " $ENV_GM
+echo "release gitmoji2= " ${{ env.ENV_GM }}
 echo "user= " $user
 echo "tag = " $tag
 
