@@ -70,9 +70,6 @@ jobs:
           
           cat /dev/null > VERSION
           echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
-          newver_extract=$(cat "VERSION")      
-          echo "New Version = " $newver_extract
-          echo "newver_extract=${newver_extract}" >> $GITHUB_ENV
        
     - name: Push changes
       run: |
@@ -89,6 +86,11 @@ jobs:
           fetch-depth: 0
     - name: Getting Version
       run: |    
+          newver_extract=$(cat "VERSION")
+          newver_extract="$(cut -d' ' -f2 <<< "$newver_extract")" 
+          echo "New Version = " $newver_extract
+          echo "newver_extract=${newver_extract}" >> $GITHUB_ENV
        echo "new env version " $newver_extract
+
        chmod +x ./script/gh_release.sh
        ./script/gh_release.sh $ENV_TOKEN $newver_extract
