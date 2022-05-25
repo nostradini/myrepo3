@@ -1,6 +1,6 @@
 
 !/usr/bin/bash
-user="nostradini"
+user="$(git log -n 1 --pretty=format:%an)"
 repo="myrepo3"
 token=$1
 tag=$2
