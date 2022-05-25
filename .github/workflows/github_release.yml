@@ -23,7 +23,7 @@ jobs:
        echo "Version string is $ver_extract_str"
        echo "ver_extract_str=${ver_extract_str}" >> $GITHUB_ENV
        echo "env version " $ver_extract_str
-       echo "gitmojiko=':sparkle:" >> $GITHUB_ENV
+       echo "gitmojiko=:sparkle:" >> $GITHUB_ENV
 
     - name: Call SH
       run: |
