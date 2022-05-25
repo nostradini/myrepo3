@@ -78,7 +78,7 @@ jobs:
           chmod +x ./script/push_ver_update.sh
           ./script/push_ver_update.sh $ENV_TOKEN
 
- GH_Release:
+  GH_Release:
    needs: Execute_Versioning
    runs-on: ubuntu-latest
    steps:
