@@ -6,7 +6,7 @@ repo="myrepo3"
 com_hash="$(git rev-parse --short HEAD)"
 token=$1
 tag=$2
-
+echo "env test value " $ver_extract_str
 echo "user " $user
 echo "tag" $tag
 vtag="v$tag"
