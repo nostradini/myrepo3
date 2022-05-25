@@ -19,7 +19,7 @@ jobs:
        ver_str=$(cat "VERSION")
        ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
        echo "Version string is $ver_extract_str"
-       echo "ver_extract_str=$ver_extract_str" >> $GITHUB_ENV
+       echo "ver_extract_str=${ver_extract_str}" >> $GITHUB_ENV
 
     - name: Call SH
       run: |
