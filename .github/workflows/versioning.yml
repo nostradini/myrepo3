@@ -13,8 +13,8 @@ env:
 jobs:
   Execute_Versioning:
     # if: github.event.pull_request.merged == true
-    if: "!contains(github.event.head_commit.message, '[JOB] Updated version file')"
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[JOB] Updated version file')"
     steps:
     - uses: actions/checkout@v3
     - name: Run logic script
