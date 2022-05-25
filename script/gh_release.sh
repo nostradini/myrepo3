@@ -7,7 +7,7 @@ com_hash="$(git rev-parse --short HEAD)"
 token=$1
 tag=$2
 
-echo "gitmoji " $gitmojiko
+echo "on release gitmoji " $gitmojiko
 echo "user " $user
 
 vtag="v$tag"

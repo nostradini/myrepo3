@@ -5,7 +5,7 @@ Repo_SHA=$(curl -H "Authorization: token $Env_Token" \
 
 echo "This is repo_sha = " $Repo_SHA
 
-echo "gitmoji " $gitmojiko
+echo "push version gitmoji " $gitmojiko
 
 UpdatedVer=$(cat ./VERSION)
 echo "Updated Version = " $UpdatedVer
