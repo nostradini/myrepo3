@@ -70,8 +70,9 @@ jobs:
           
           cat /dev/null > VERSION
           echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
-          temp2=$(cat "VERSION")      
-          echo "New Version = " $temp2
+          newver_extract=$(cat "VERSION")      
+          echo "New Version = " $newver_extract
+          echo "newver_extract=${newver_extract}" >> $GITHUB_ENV
        
     - name: Push changes
       run: |
@@ -82,19 +83,12 @@ jobs:
    needs: Execute_Versioning
    runs-on: ubuntu-latest
    steps:
-    # - name: Checkout Code
-    #   uses: actions/checkout@v3
-    #   with: 
-    #       fetch-depth: 0
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with: 
+          fetch-depth: 0
     - name: Getting Version
-      run: |
-      #  ver_str=$(cat "VERSION")
-      #  ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
-      #  echo "Version string is $ver_extract_str"
-      # echo "ver_extract_str=${ver_extract_str}" >> $GITHUB_ENV
-      #   echo "env version " $ver_extract_str
-
-    - name: Call SH
-      run: |
-        chmod +x ./script/gh_release.sh
-        ./script/gh_release.sh $ENV_TOKEN $ver_extract_str
+      run: |    
+       echo "new env version " $newver_extract
+       chmod +x ./script/gh_release.sh
+       ./script/gh_release.sh $ENV_TOKEN $newver_extract
