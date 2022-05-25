@@ -73,6 +73,8 @@ jobs:
           echo "New Version = " $temp2
        
     - name: Push changes
+      with:
+        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "gitmo": $gitmojiko}'
       run: |
           chmod +x ./script/push_ver_update.sh
           ./script/push_ver_update.sh $ENV_TOKEN

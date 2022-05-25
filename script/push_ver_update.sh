@@ -5,7 +5,7 @@ Repo_SHA=$(curl -H "Authorization: token $Env_Token" \
 
 echo "This is repo_sha = " $Repo_SHA
 
-echo $gitmojiko
+echo "gitmoji " $gitmojiko
 
 UpdatedVer=$(cat ./VERSION)
 echo "Updated Version = " $UpdatedVer
@@ -14,8 +14,8 @@ content=$(echo $content | tr -d ' ')
 content=\"${content}\"
 echo "Content is = " $content
 
-# curl -i -X PUT \
-# -H "Authorization: token $Env_Token" \
-# -H "Accept: application/vnd.github.v3+json" \
-# -d '{ "path":"VERSION","message":"[JOB] Push version","content":'$content',"branch":"main","sha":'$Repo_SHA' }' \
-#  https://api.github.com/repos/nostradini/myrepo3/contents/VERSION
+curl -i -X PUT \
+-H "Authorization: token $Env_Token" \
+-H "Accept: application/vnd.github.v3+json" \
+-d '{ "path":"VERSION","message":"[JOB] Push version","content":'$content',"branch":"main","sha":'$Repo_SHA' }' \
+ https://api.github.com/repos/nostradini/myrepo3/contents/VERSION
