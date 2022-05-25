@@ -88,8 +88,10 @@ jobs:
     - uses: actions/checkout@v3
       with: 
           fetch-depth: 0
-    - name: Checkout Code
-
+    - name: Validating Version
+      run: |
+          sh_ver_extract=$(cat "VERSION")
+          sh_ver="$(cut -d' ' -f2 <<< $sh_ver_extract)" 
     - name: Creating Relesae Tag
       run: |    
           chmod +x ./script/gh_release.sh
