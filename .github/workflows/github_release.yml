@@ -12,8 +12,6 @@ jobs:
  GH_Release:
   runs-on: ubuntu-latest
   steps:
-    - name: SHOW GITHUB CONTEXT
-      run: echo "$GITHUB_CONTEXT"
     - name: Checkout Code
       uses: actions/checkout@v3
     - name: Getting Version
