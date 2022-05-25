@@ -11,7 +11,7 @@ on:
 
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
-  newver_ver: $(cut -d' ' -f2 <<< "$newver_extract")
+  newver_ver: "$(cut -d' ' -f2 <<< "$newver_extract")""
 jobs:
   Execute_Versioning:
     # if: github.event.pull_request.merged == true
