@@ -24,7 +24,7 @@ jobs:
        echo "ver_extract_str=${ver_extract_str}" >> $GITHUB_ENV
        echo "env version " $ver_extract_str
        gitmojiko=${{ github.event.client_payload.gitmo}}
-       echo "payload= " ${{ github.event.client_payload.gitmo}}
+       echo "payload= " $gitmojiko
 
     - name: Call SH
       run: |
