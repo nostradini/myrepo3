@@ -11,7 +11,8 @@ on:
 
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
-  ENV_SV: $new_version
+  ENV_SV: $(new_version)
+  ENV_GM: $(gitmojiko)
 jobs:
   Execute_Versioning:
     # if: github.event.pull_request.merged == true
