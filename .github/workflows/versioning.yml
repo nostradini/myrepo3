@@ -11,6 +11,7 @@ on:
 
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
+  ENV_SV: $new_version
 jobs:
   Execute_Versioning:
     # if: github.event.pull_request.merged == true
@@ -90,5 +91,5 @@ jobs:
     - name: Creating Relesae Tag
       run: |    
           chmod +x ./script/gh_release.sh
-          ./script/gh_release.sh $ENV_TOKEN $new_version
+          ./script/gh_release.sh $ENV_TOKEN $ENV_SV
 
