@@ -8,6 +8,11 @@ on:
     paths-ignore:
     - 'VERSION'
   workflow_dispatch:
+      inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
 jobs:
