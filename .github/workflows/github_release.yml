@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - 'VERSION'
-
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
 jobs:
