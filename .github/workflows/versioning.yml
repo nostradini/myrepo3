@@ -20,9 +20,9 @@ jobs:
       outgit: ${{ steps.gitmo.outputs.icon }}
       outver: ${{ steps.gitmo.outputs.ver }}
     steps:
-    - id: gitmo
     - uses: actions/checkout@v3
     - name: Run logic script
+    - id: gitmo
       run: |
           lastCommit=$(git log --format=%B -n 1 HEAD)
           echo "Last commit = " $lastCommit
