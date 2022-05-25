@@ -18,8 +18,6 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
     steps:
     - uses: actions/checkout@v3
-      # with:
-      #   client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "gitmo": $gitmojiko}'
     - name: Run logic script
       run: |
           lastCommit=$(git log --format=%B -n 1 HEAD)
@@ -79,3 +77,24 @@ jobs:
       run: |
           chmod +x ./script/push_ver_update.sh
           ./script/push_ver_update.sh $ENV_TOKEN
+
+ GH_Release:
+   needs: Execute_Versioning
+   runs-on: ubuntu-latest
+   steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with: 
+          fetch-depth: 0
+    - name: Getting Version
+      run: |
+       ver_str=$(cat "VERSION")
+       ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
+       echo "Version string is $ver_extract_str"
+       echo "ver_extract_str=${ver_extract_str}" >> $GITHUB_ENV
+       echo "env version " $ver_extract_str
+
+    - name: Call SH
+      run: |
+        chmod +x ./script/gh_release.sh
+        ./script/gh_release.sh $ENV_TOKEN $ver_extract_str

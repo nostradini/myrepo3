@@ -15,7 +15,6 @@ jobs:
       uses: actions/checkout@v3
       with: 
           fetch-depth: 0
-          ref: ${{ github.event.client_payload.ref }}
     - name: Getting Version
       run: |
        ver_str=$(cat "VERSION")
@@ -23,8 +22,6 @@ jobs:
        echo "Version string is $ver_extract_str"
        echo "ver_extract_str=${ver_extract_str}" >> $GITHUB_ENV
        echo "env version " $ver_extract_str
-       gitmojiko=${{ github.event.client_payload.gitmo}}
-       echo "payload= " $gitmojiko
 
     - name: Call SH
       run: |
