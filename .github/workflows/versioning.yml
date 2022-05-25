@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Run logic script
-          run: |
+      run: |
           lastCommit=$(git log --format=%B -n 1 HEAD)
           echo "Last commit = " $lastCommit
           ver_str=$(cat "VERSION")
