@@ -3,7 +3,7 @@ on:
   # pull_request:
   #   branches: [ main ]
   #   types: [closed]
-  # push: [main]  
+  push: [main]  
   workflow_dispatch:
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
