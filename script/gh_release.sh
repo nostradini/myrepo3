@@ -1,5 +1,4 @@
-
-!/usr/bin/bash
+# !/usr/bin/bash
 user="$(git log -n 1 --pretty=format:%an)"
 repo="myrepo3"
 # target="$(git symbolic-ref --short HEAD)"
