@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 Env_Token=$1
 echo "new version= " $new_version
+echo "new_ver= "$new_ver
 Repo_SHA=$(curl -H "Authorization: token $Env_Token" \
 -X GET https://api.github.com/repos/nostradini/myrepo3/contents/VERSION | jq .sha)
 

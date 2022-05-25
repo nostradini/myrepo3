@@ -9,6 +9,7 @@ tag=$2
 
 echo "release gitmoji= " $gitmojiko
 echo "user= " $user
+echo "tag = " $tag
 
 vtag="v$tag"
 tag=\"${tag}\"

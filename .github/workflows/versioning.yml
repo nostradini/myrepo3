@@ -90,5 +90,5 @@ jobs:
     - name: Creating Relesae Tag
       run: |    
           chmod +x ./script/gh_release.sh
-          ./script/gh_release.sh $ENV_TOKEN $newver_ver
+          ./script/gh_release.sh $ENV_TOKEN $new_version
 
