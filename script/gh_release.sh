@@ -6,8 +6,6 @@ com_hash="$(git rev-parse --short HEAD)"
 token=$1
 # tag=$2
 
-sh_ver_extract=$(cat "VERSION")
-sh_ver="$(cut -d' ' -f2 <<< $sh_ver_extract)" 
 tag=$sh_ver
 echo "sh version= " $sh_ver
 echo "release gitmoji= " $ENV_GM
