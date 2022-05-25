@@ -1,17 +1,16 @@
 name: Versioning
 on:
-  pull_request:
-    branches: [ main ]
-    types: [closed]
-    
+  # pull_request:
+  #   branches: [ main ]
+  #   types: [closed]
+  # push: [main]  
   #workflow_dispatch:
 env:
-  ENV_TOKEN: ${{ secrets.PAT_SECRET }}
+  ENV_TOKEN: ${{ secrets.DOOR }}
 jobs:
   Execute_Versioning:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    #permissions: write-all
     steps:
     - uses: actions/checkout@v3
     - name: Run logic script
@@ -32,6 +31,7 @@ jobs:
           if [[ "$lowerstr" == *"#major"* ]]
           then
           echo "Found major in commit"
+          echo 
           ver_major=$((ver_major+1))
           ver_minor=0
           ver_patch=0
