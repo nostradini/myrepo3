@@ -16,7 +16,11 @@ jobs:
     # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
+    outputs:
+      outgit: ${{ steps.gitmo.outputs.icon }}
+      outver: ${{ steps.gitmo.outputs.ver }}
     steps:
+    - id: gitmo
     - uses: actions/checkout@v3
     - name: Run logic script
       run: |
@@ -57,7 +61,8 @@ jobs:
           ver_patch=$((ver_patch+1))
           fi
           echo "ver_major=$ver_major,ver_minor=$ver_minor,ver_patch=$ver_patch"
-          
+          echo "::set-output name=icon::$gitmojiko"
+
           LenlastComm=${#lastCommit}
           echo "size of commit is = " $LenlastComm
           if [[ $LenlastComm -gt 50 ]]
@@ -70,7 +75,10 @@ jobs:
           
           cat /dev/null > VERSION
           echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
-       
+          newver_extract=$(cat "VERSION")
+          newver_extract="$(cut -d' ' -f2 <<< "$newver_extract")" 
+          echo "::set-output name=ver::$newver_extract"
+
     - name: Push changes
       run: |
           chmod +x ./script/push_ver_update.sh
@@ -86,10 +94,12 @@ jobs:
           fetch-depth: 0
     - name: Getting Version
       run: |    
-          newver_extract=$(cat "VERSION")
-          newver_extract="$(cut -d' ' -f2 <<< "$newver_extract")" 
-          echo "New Version = " $newver_extract
-          echo "newver_extract=${newver_extract}" >> $GITHUB_ENV
-          echo "new env version " $newver_extract
+          echo "outgit= " ${{needs.Execute_Versioning.outputs.outgit}}
+          echo "putver= " ${{needs.Execute_Versioning.outputs.outver}}
+          #newver_extract=$(cat "VERSION")
+          #newver_extract="$(cut -d' ' -f2 <<< "$newver_extract")" 
+          #echo "New Version = " $newver_extract
+          #echo "newver_extract=${newver_extract}" >> $GITHUB_ENV
+          #echo "new env version " $newver_extract
           chmod +x ./script/gh_release.sh
           ./script/gh_release.sh $ENV_TOKEN $newver_extract
