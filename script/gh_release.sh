@@ -11,11 +11,14 @@ echo "ENV_VER= " $ENV_VER
 echo "user= " $user
 echo "tag = " $ENV_VER
 
-gm_type=\""$(cut -d' ' -f1 <<< "$ENV_GM")"\""
-gm_desc1=\""$(cut -d' ' -f2 <<< "$ENV_GM")"\"
-gm_desc2=\""$(cut -d' ' -f3 <<< "$ENV_GM")"\"
+gm_type="$(cut -d' ' -f1 <<< "$ENV_GM")"
+gm_desc1="$(cut -d' ' -f2 <<< "$ENV_GM")"
+gm_desc2="$(cut -d' ' -f3 <<< "$ENV_GM")"
+gm_type=\"${gm_type}\"
+gm_desc1=\"${gm_desc1}\"
+gm_desc2=\"${gm_desc2}\"
 
-echo "split - $gm_type  $gm_desc1 $gm_desc2"
+echo "split - $gm_type , $gm_desc1 , $gm_desc2"
 
 vtag="v$tag"
 tag=\"${tag}\"
