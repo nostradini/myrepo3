@@ -102,7 +102,7 @@ jobs:
           sh_ver="$(cut -d' ' -f2 <<< $sh_ver_extract)" 
           echo "ver from yam= " $sh_ver
           echo "gh_sh_ver=$sh_ver" >> $GITHUB_ENV
-          echo "from output= ${{needs.Execute_Versioning.outputs.ENV_GM}"
+          echo "from output= ${{needs.Execute_Versioning.outputs.ENV_GM}}"
     - name: Creating Relesae Tag
       run: |    
           chmod +x ./script/gh_release.sh
