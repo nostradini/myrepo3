@@ -23,9 +23,13 @@ tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
 # $gm_type $gm_desc1 $gm_desc2 
-data="### {$ENV_GM} \n '$com_hash' - {$ENV_MSG}"
+data="### $ENV_GM \n $com_hash - $ENV_MSG"
 data=\"${data}\"
 echo "data=" $data
+data=$(echo $data | base64)
+data=$(echo $data | tr -d ' ')
+data=\"${data}\"
+echo "base64 data= " $data
 
 curl \
 -X POST \
@@ -35,5 +39,6 @@ https://api.github.com/repos/$user/$repo/releases  \
 -d '{"tag_name": '$tag' ,
 "target_commitish":"main" , 
 "name": '$vtag' ,
-"body": "some one new" ,
-"draft":false,"prerelease":false,"generate_release_notes":false}'
+"body": '$data' ,
+"draft":false,"prerelease":false,
+"generate_release_notes":false}'
