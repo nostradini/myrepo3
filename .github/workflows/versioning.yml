@@ -90,6 +90,8 @@ jobs:
           fetch-depth: 0
     - name: Validating Version
       run: |
+          git pull
+          git fetch --all
           sh_ver_extract=$(cat "VERSION")
           sh_ver="$(cut -d' ' -f2 <<< $sh_ver_extract)" 
           echo "ver from yam= " $sh_ver
