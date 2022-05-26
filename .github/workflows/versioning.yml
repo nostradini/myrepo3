@@ -79,7 +79,7 @@ jobs:
           echo "new_version=$new_ver" >> $GITHUB_ENV
 
     - name: Set variable
-    - id: setvar
+      id: setvar
       run: echo "::set-output name=gitmo::$gitmojiko"
 
     - name: Push changes
