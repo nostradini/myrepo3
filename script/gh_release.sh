@@ -14,23 +14,13 @@ echo "tag = " $ENV_VER
 gm_type="$(cut -d' ' -f1 <<< "$ENV_GM")"
 gm_desc1="$(cut -d' ' -f2 <<< "$ENV_GM")"
 gm_desc2="$(cut -d' ' -f3 <<< "$ENV_GM")"
-# gm_type=\"${gm_type}\"
-# gm_desc1=\"${gm_desc1}\"
-# gm_desc2=\"${gm_desc2}\"
 
-STG_GM=\"${ENV_GM}\"
-
-echo "STG_GM= " $STG_GM
 echo "split - $gm_type , $gm_desc1 , $gm_desc2"
-# '$gm_type' '$gm_desc1' '$gm_desc2'
-# 
+
 vtag="v$tag"
 tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
-
-data= "### '$gm_type' '$gm_desc1' '$gm_desc2' \n '$com_hash' - release again using script"
-echo $data
 
 curl \
 -X POST \
