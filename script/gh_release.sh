@@ -14,9 +14,9 @@ echo "tag = " $ENV_VER
 gm_type="$(cut -d' ' -f1 <<< "$ENV_GM")"
 gm_desc1="$(cut -d' ' -f2 <<< "$ENV_GM")"
 gm_desc2="$(cut -d' ' -f3 <<< "$ENV_GM")"
-gm_type=\"${gm_type}\"
-gm_desc1=\"${gm_desc1}\"
-gm_desc2=\"${gm_desc2}\"
+# gm_type=\"${gm_type}\"
+# gm_desc1=\"${gm_desc1}\"
+# gm_desc2=\"${gm_desc2}\"
 
 STG_GM=\"${ENV_GM}\"
 
