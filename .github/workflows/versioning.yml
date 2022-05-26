@@ -40,7 +40,7 @@ jobs:
           if [[ "$lowerstr" == *"#major"* ]]
           then
           echo "Found major in commit"
-          echo "gitmojiko=:boom: BREAKING CHANGES" >> $GITHUB_ENV
+          echo "gitmojiko=:boom: Breaking Changes" >> $GITHUB_ENV
           ver_major=$((ver_major+1))
           ver_minor=0
           ver_patch=0
