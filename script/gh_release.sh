@@ -26,10 +26,6 @@ echo $tag $vtag
 data="### $ENV_GM \n $com_hash - $ENV_MSG"
 data=\"${data}\"
 echo "data=" $data
-data=$(echo $data | base64)
-data=$(echo $data | tr -d ' ')
-data=\"${data}\"
-echo "base64 data= " $data
 
 curl \
 -X POST \
@@ -39,6 +35,6 @@ https://api.github.com/repos/$user/$repo/releases  \
 -d '{"tag_name": '$tag' ,
 "target_commitish":"main" , 
 "name": '$vtag' ,
-"body": '$data' ,
+"body": $data ,
 "draft":false,"prerelease":false,
 "generate_release_notes":false}'
