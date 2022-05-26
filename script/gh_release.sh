@@ -23,7 +23,7 @@ STG_GM=\"${ENV_GM}\"
 echo "STG_GM= " $STG_GM
 echo "split - $gm_type , $gm_desc1 , $gm_desc2"
 # '$gm_type' '$gm_desc1' '$gm_desc2'
-# '$gm_type' '$gm_desc1' '$gm_desc2'
+# 
 vtag="v$tag"
 tag=\"${tag}\"
 vtag=\"${vtag}\"
@@ -37,4 +37,4 @@ curl \
 -H "Authorization: token $token" \
 -H "Accept: application/vnd.github.v3+json" \
 https://api.github.com/repos/$user/$repo/releases  \
--d '{"tag_name": '$tag' ,"target_commitish":"main" , "name": '$vtag' ,"body": "### '$ENV_GM' \n '$com_hash' - release again using script","draft":false,"prerelease":false,"generate_release_notes":false}'
+-d '{"tag_name": '$tag' ,"target_commitish":"main" , "name": '$vtag' ,"body": "### '$gm_type' '$gm_desc1' '$gm_desc2' \n '$com_hash' - release again using script","draft":false,"prerelease":false,"generate_release_notes":false}'
