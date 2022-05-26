@@ -6,7 +6,6 @@ com_hash="$(git rev-parse --short HEAD)"
 token=$1
 tag=$2
 
-echo "sh version= " $gh_sh_ver
 echo "gh_sh_ver= " $gh_sh_ver
 echo "release gitmoji= " $ENV_GM
 
