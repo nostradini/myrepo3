@@ -28,7 +28,7 @@ tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
 
-data= "### $STG_GM \n '$com_hash' - release again using script"
+data= "### " && '$STG_GM' && " \n '$com_hash' - release again using script"
 echo $data
 
 # curl \
