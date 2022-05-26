@@ -4,7 +4,7 @@ repo="myrepo3"
 # target="$(git symbolic-ref --short HEAD)"
 com_hash="$(git rev-parse --short HEAD)"
 token=$1
-tag=$2
+tag=$ENV_VER
 
 echo "gh_sh_ver= " $gh_sh_ver
 echo "END_GM= " $ENV_GM
