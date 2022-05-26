@@ -35,6 +35,6 @@ https://api.github.com/repos/$user/$repo/releases  \
 -d '{"tag_name": '$tag' ,
 "target_commitish":"main" , 
 "name": '$vtag' ,
-"body": $data ,
+"body": '$data' ,
 "draft":false,"prerelease":false,
 "generate_release_notes":false}'
