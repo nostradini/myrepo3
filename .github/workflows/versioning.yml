@@ -77,10 +77,11 @@ jobs:
           newver_extract=$(cat "VERSION")
           new_ver="$(cut -d' ' -f2 <<< "$newver_extract")" 
           echo "new_version=$new_ver" >> $GITHUB_ENV
+
     - name: Set variable
     - id: setvar
-      run: |
-          echo "::set-output name=gitmo::$gitmojiko"
+      run: echo "::set-output name=gitmo::$gitmojiko"
+
     - name: Push changes
       run: |
           chmod +x ./script/push_ver_update.sh
