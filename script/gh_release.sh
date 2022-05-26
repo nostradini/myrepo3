@@ -22,6 +22,7 @@ vtag="v$tag"
 tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
+echo "### '$gm_type' '$gm_desc1' '$gm_desc2' \n '$com_hash' - '$ENV_MSG'"
 
 curl \
 -X POST \
