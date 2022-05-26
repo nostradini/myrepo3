@@ -40,24 +40,24 @@ jobs:
           if [[ "$lowerstr" == *"#major"* ]]
           then
           echo "Found major in commit"
-          echo "gitmojiko=':boom: BREAKING CHANGES'" >> $GITHUB_ENV
+          echo "gitmojiko=:boom: BREAKING CHANGES" >> $GITHUB_ENV
           ver_major=$((ver_major+1))
           ver_minor=0
           ver_patch=0
           elif [[ "$lowerstr" == *"#minor"* ]]
           then
           echo "Found minor in commit"
-          echo "gitmojiko=':sparkles: New Features'" >> $GITHUB_ENV
+          echo "gitmojiko=:sparkles: New Features" >> $GITHUB_ENV
           ver_minor=$((ver_minor+1))
           ver_patch=0
           elif [[ "$lowerstr" == *"#patch"* ]]
           then
           echo "Found patch in commit"
-          echo "gitmojiko=':bug: Bug Fixes'" >> $GITHUB_ENV
+          echo "gitmojiko=:bug: Bug Fixes" >> $GITHUB_ENV
           ver_patch=$((ver_patch+1))
           else
           echo "Default condition"
-          echo "gitmojiko=':bug: Bug Fixes'" >> $GITHUB_ENV
+          echo "gitmojiko=:bug: Bug Fixes" >> $GITHUB_ENV
           ver_patch=$((ver_patch+1))
           fi
           echo "ver_major=$ver_major,ver_minor=$ver_minor,ver_patch=$ver_patch"
@@ -99,12 +99,6 @@ jobs:
           fetch-depth: 0
     - name: Validating Version
       run: |
-          #git pull
-          #git fetch --all
-          #sh_ver_extract=$(cat "VERSION")
-          #sh_ver="$(cut -d' ' -f2 <<< $sh_ver_extract)" 
-          #echo "ver from yam= " $sh_ver
-          #echo "gh_sh_ver=$sh_ver" >> $GITHUB_ENV
           echo "GM output= ${{needs.Execute_Versioning.outputs.ENV_GM}}"
           echo "VER output= ${{needs.Execute_Versioning.outputs.ENV_VER}}"
           echo "ENV_GM=${{needs.Execute_Versioning.outputs.ENV_GM}}" >> $GITHUB_ENV
