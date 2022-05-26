@@ -12,7 +12,7 @@ on:
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
   ENV_SV: '$new_version'
-  ENV_GM: 'gitmojiko'
+  ENV_GM: $(echo "gitmojiko=:bug:" >> $GITHUB_ENV)
 jobs:
   Execute_Versioning:
     # if: github.event.pull_request.merged == true
@@ -99,5 +99,5 @@ jobs:
     - name: Creating Relesae Tag
       run: |    
           chmod +x ./script/gh_release.sh
-          ./script/gh_release.sh $ENV_TOKEN
+          ./script/gh_release.sh $ENV_TOKEN $gh_sh_ver
 
