@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       ENV_GM: ${{ steps.setvar.outputs.gitmo }}
-
+      ENV_VER: ${{ steps.setvar.outputs.sh_ver }}
     if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
     steps:
     - uses: actions/checkout@v3
@@ -80,7 +80,9 @@ jobs:
 
     - name: Set variable
       id: setvar
-      run: echo "::set-output name=gitmo::$gitmojiko"
+      run: |
+          echo "::set-output name=gitmo::$gitmojiko"
+          echo "::set-output name=sh_ver::$new_ver"
 
     - name: Push changes
       run: |
@@ -96,13 +98,17 @@ jobs:
           fetch-depth: 0
     - name: Validating Version
       run: |
-          git pull
-          git fetch --all
-          sh_ver_extract=$(cat "VERSION")
-          sh_ver="$(cut -d' ' -f2 <<< $sh_ver_extract)" 
-          echo "ver from yam= " $sh_ver
-          echo "gh_sh_ver=$sh_ver" >> $GITHUB_ENV
+          #git pull
+          #git fetch --all
+          #sh_ver_extract=$(cat "VERSION")
+          #sh_ver="$(cut -d' ' -f2 <<< $sh_ver_extract)" 
+          #echo "ver from yam= " $sh_ver
+          #echo "gh_sh_ver=$sh_ver" >> $GITHUB_ENV
           echo "from output= ${{needs.Execute_Versioning.outputs.ENV_GM}}"
+          echo "from output= ${{needs.Execute_Versioning.outputs.ENV_VER}}"
+          echo "ENV_GM=${{needs.Execute_Versioning.outputs.ENV_GM}}" >> $GITHUB_ENV
+          echo "ENV_VER=${{needs.Execute_Versioning.outputs.ENV_VER}}" >> $GITHUB_ENV
+
     - name: Creating Relesae Tag
       run: |    
           chmod +x ./script/gh_release.sh

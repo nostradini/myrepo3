@@ -7,10 +7,11 @@ token=$1
 tag=$2
 
 echo "gh_sh_ver= " $gh_sh_ver
-echo "release gitmoji= " $ENV_GM
+echo "END_GM= " $ENV_GM
+echo "ENV_VER= " $ENV_VER
 
 echo "user= " $user
-echo "tag = " $tag
+echo "tag = " $ENV_VER
 
 vtag="v$tag"
 tag=\"${tag}\"
