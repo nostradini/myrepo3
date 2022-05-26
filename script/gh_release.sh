@@ -23,7 +23,7 @@ tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
 # $gm_type $gm_desc1 $gm_desc2 
-data="### $ENV_GM \n $com_hash - $ENV_MSG"
+data="### $ENV_GM \n $com_hash $ENV_MSG"
 data=\"${data}\"
 echo "data=" $data
 
