@@ -23,18 +23,36 @@ tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
 # $gm_type $gm_desc1 $gm_desc2 
-data="### '$ENV_GM' \n '$com_hash' '$ENV_MSG'"
-data=\"${data}\"
-echo "data=" $data
+data="### $ENV_GM \n $com_hash $ENV_MSG"
+
+You don't need to pass the quotes enclosing the custom headers to curl. Also, your variables in the middle of the data argument should be quoted.
+
+First, write a function that generates the post data of your script. This saves you from all sort of headaches concerning shell quoting and makes it easier to read an maintain the script than feeding the post data on curl's invocation line as in your attempt:
+
+prep_post_data()
+{
+  cat <<EOF
+{
+  "tag_name": "$tag",
+  "target_commitish":"main" , 
+  "name": "$vtag" ,
+  "body": "$data" ,
+  "draft":false,"prerelease":false,
+  "generate_release_notes":false
+}
+EOF
+}
 
 curl \
 -X POST \
 -H "Authorization: token $token" \
 -H "Accept: application/vnd.github.v3+json" \
 https://api.github.com/repos/$user/$repo/releases  \
--d '{"tag_name": '$tag' ,
-"target_commitish":"main" , 
-"name": '$vtag' ,
-"body": '$data' ,
-"draft":false,"prerelease":false,
-"generate_release_notes":false}'
+-d "$(prep_post_data)"
+
+# {"tag_name": '$tag' ,
+# "target_commitish":"main" , 
+# "name": '$vtag' ,
+# "body": '$data' ,
+# "draft":false,"prerelease":false,
+# "generate_release_notes":false}'
