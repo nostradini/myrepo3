@@ -24,10 +24,7 @@ vtag=\"${vtag}\"
 echo $tag $vtag
 # $gm_type $gm_desc1 $gm_desc2 
 data="### $ENV_GM \n $com_hash $ENV_MSG"
-
-You don't need to pass the quotes enclosing the custom headers to curl. Also, your variables in the middle of the data argument should be quoted.
-
-First, write a function that generates the post data of your script. This saves you from all sort of headaches concerning shell quoting and makes it easier to read an maintain the script than feeding the post data on curl's invocation line as in your attempt:
+echo "data= " $data
 
 prep_post_data()
 {
