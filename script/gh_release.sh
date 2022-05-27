@@ -30,9 +30,9 @@ prep_post_data()
 {
   cat <<EOF
 {
-  "tag_name": "$tag",
+  "tag_name": $tag,
   "target_commitish":"main" , 
-  "name": "$vtag" ,
+  "name": $vtag ,
   "body": "$data" ,
   "draft":false,"prerelease":false,
   "generate_release_notes":false
