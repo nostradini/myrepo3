@@ -39,7 +39,7 @@ prep_post_data()
 }
 EOF
 }
-
+echo "$(prep_post_data)"
 curl \
 -X POST \
 -H "Authorization: token $token" \
