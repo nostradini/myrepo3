@@ -17,7 +17,7 @@ tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
 
-data="### $ENV_GM \n $com_hash $ENV_MSG"
+data="### $ENV_GM \n * $com_hash $ENV_MSG"
 echo "data= " $data
 
 prep_post_data()
