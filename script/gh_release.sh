@@ -12,17 +12,11 @@ echo "user= " $user
 echo "tag = " $ENV_VER
 echo "message= " $ENV_MSG
 
-gm_type="$(cut -d' ' -f1 <<< "$ENV_GM")"
-gm_desc1="$(cut -d' ' -f2 <<< "$ENV_GM")"
-gm_desc2="$(cut -d' ' -f3 <<< "$ENV_GM")"
-
-echo "split - $gm_type , $gm_desc1 , $gm_desc2"
-
 vtag="v$tag"
 tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
-# $gm_type $gm_desc1 $gm_desc2 
+
 data="### $ENV_GM \n $com_hash $ENV_MSG"
 echo "data= " $data
 
@@ -39,7 +33,9 @@ prep_post_data()
 }
 EOF
 }
+
 echo "$(prep_post_data)"
+
 curl \
 -X POST \
 -H "Authorization: token $token" \
