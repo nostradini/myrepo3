@@ -90,7 +90,7 @@ jobs:
           chmod +x ./script/push_ver_update.sh
           ./script/push_ver_update.sh $ENV_TOKEN
 
-  GH_Release:
+  Create_Release:
    needs: Execute_Versioning
    runs-on: ubuntu-latest
    steps:
