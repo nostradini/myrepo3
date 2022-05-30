@@ -11,7 +11,7 @@ on:
 
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
-  ENV_MSG: ${{ github.event.head_commit.message }}
+  ENV_MSG: $(git log -1 --pretty=format:"%s")  #${{ github.event.head_commit.message }}
 jobs:
   Execute_Versioning:
     # if: github.event.pull_request.merged == true
