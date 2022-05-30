@@ -1,12 +1,12 @@
 name: Versioning
 on:
-  pull_request:
-    branches: [ main ]
-    types: [closed]
-  # push:
-  #    branches: [main]
-  #    paths-ignore:
-  #    - 'VERSION'
+  # pull_request:
+  #   branches: [ main ]
+  #   types: [closed]
+  push:
+     branches: [main]
+     paths-ignore:
+     - 'VERSION'
   workflow_dispatch:
 
 env:
@@ -75,6 +75,7 @@ jobs:
           cat /dev/null > VERSION
           echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
           newver_extract=$(cat "VERSION")
+          echo "new_extarct - " $newver_extract
           new_ver="$(cut -d' ' -f2 <<< "$newver_extract")"
           echo "new_ver -" $new_ver
           echo "new_version=$new_ver" >> $GITHUB_ENV
