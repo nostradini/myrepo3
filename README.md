@@ -14,3 +14,4 @@ set github env
 222 ddd fff
 checkshort
 anongther_line
+test on multiple words commit
