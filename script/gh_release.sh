@@ -10,6 +10,7 @@ echo "END_GM= " $ENV_GM
 echo "ENV_VER= " $ENV_VER
 echo "User= " $user
 echo "Message= " $ENV_MSG
+echo "FromVersioning" ${{needs.Execute_Versioning.outputs.ENV_MSG}}
 
 vtag="v$tag"
 tag=\"${tag}\"

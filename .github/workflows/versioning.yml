@@ -40,7 +40,6 @@ jobs:
 
           lowerstr=$(echo $lastCommit |tr '[:upper:]' '[:lower:]')
           echo "transformed to lower = $lowerstr"
-          
           if [[ "$lowerstr" == *"#major"* ]]
           then
           echo "Found major in commit"
@@ -78,6 +77,7 @@ jobs:
           
           cat /dev/null > VERSION
           echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
+
           newver_extract=$(cat "VERSION")
           echo "new_extract - " $newver_extract
           new_ver="$(cut -d' ' -f2 <<< "$newver_extract")"
