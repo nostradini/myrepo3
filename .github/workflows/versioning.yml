@@ -19,16 +19,17 @@ jobs:
     outputs:
       ENV_GM: ${{ steps.setvar.outputs.gitmo }}
       ENV_VER: ${{ steps.setvar.outputs.sh_ver }}
-      ENV_MSG: ${{ steps.setvar.outputs.message }}
+      ENV_MSG: ${{ steps.ci.outputs.message }}
     #if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
     steps:
     - uses: actions/checkout@v3
     - name: Run logic script
+      id: ci
       run: |
           lastCommit=$(git log --format=%B -n 1 HEAD)
           echo "Last commit = " $lastCommit
           echo "::set-output name=message::$lastCommit"
-          echo "ENV_MSG=${{needs.Execute_Versioning.outputs.ENV_MSG}}" >> $GITHUB_ENV
+          
           ver_str=$(cat "VERSION")
           ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
           echo "Version string is $ver_extract_str"
@@ -108,6 +109,7 @@ jobs:
           echo "VER output= ${{needs.Execute_Versioning.outputs.ENV_VER}}"
           echo "ENV_GM=${{needs.Execute_Versioning.outputs.ENV_GM}}" >> $GITHUB_ENV
           echo "ENV_VER=${{needs.Execute_Versioning.outputs.ENV_VER}}" >> $GITHUB_ENV
+          echo "ENV_MSG=${{needs.Execute_Versioning.outputs.ENV_MSG}}" >> $GITHUB_ENV
 
     - name: Creating Relesae Tag
       run: |    
