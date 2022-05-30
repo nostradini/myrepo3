@@ -79,10 +79,10 @@ jobs:
           new_ver="$(cut -d' ' -f2 <<< "$newver_extract")"
           echo "new_ver -" $new_ver
           echo "new_version=$new_ver" >> $GITHUB_ENV
-          echo "new_version= " $new_version
 
     - name: Push changes
       run: |
+          echo "new_version= " $new_version
           chmod +x ./script/push_ver_update.sh
           ./script/push_ver_update.sh $ENV_TOKEN
 
