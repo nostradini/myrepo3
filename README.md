@@ -1,2 +1,3 @@
 MYREPO3
-tst lang po
+checking this time from pr
+another ci for #minor
