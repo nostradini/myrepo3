@@ -79,16 +79,16 @@ jobs:
           echo "new_version=$new_ver" >> $GITHUB_ENV
           echo "new_ver= " $new_ver
 
+    - name: Push changes
+      run: |
+          chmod +x ./script/push_ver_update.sh
+          ./script/push_ver_update.sh $ENV_TOKEN
+
     - name: Set variable
       id: setvar
       run: |
           echo "::set-output name=gitmo::$gitmojiko"
           echo "::set-output name=sh_ver::$new_version"
-
-    - name: Push changes
-      run: |
-          chmod +x ./script/push_ver_update.sh
-          ./script/push_ver_update.sh $ENV_TOKEN
 
   Create_Release:
    needs: Execute_Versioning
