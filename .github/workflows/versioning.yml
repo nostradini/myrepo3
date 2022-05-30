@@ -19,6 +19,7 @@ jobs:
     outputs:
       ENV_GM: ${{ steps.setvar.outputs.gitmo }}
       ENV_VER: ${{ steps.setvar.outputs.sh_ver }}
+      ENV_MSG: ${{ steps.setvar.outputs.message }}
     #if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
     steps:
     - uses: actions/checkout@v3
@@ -26,6 +27,8 @@ jobs:
       run: |
           lastCommit=$(git log --format=%B -n 1 HEAD)
           echo "Last commit = " $lastCommit
+          echo "::set-output name=message::$lastCommit"
+          
           ver_str=$(cat "VERSION")
           ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
           echo "Version string is $ver_extract_str"
@@ -79,8 +82,7 @@ jobs:
           new_ver="$(cut -d' ' -f2 <<< "$newver_extract")"
           echo "new_ver -" $new_ver
           echo "new_version=$new_ver" >> $GITHUB_ENV
-          echo '::set-env name=ENV_MSG::${{ github.event.head_commit.message }}'
-
+         
     - name: Push changes
       run: |
           echo "new_version= " $new_version
