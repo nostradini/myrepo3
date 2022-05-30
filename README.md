@@ -12,3 +12,4 @@ set commit message
 ser-ops used
 set github env
 222 ddd fff
+checkshort
