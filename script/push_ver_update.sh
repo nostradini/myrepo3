@@ -5,6 +5,7 @@ Repo_SHA=$(curl -H "Authorization: token $Env_Token" \
 -X GET https://api.github.com/repos/nostradini/myrepo3/contents/VERSION | jq .sha)
 
 echo "This is repo_sha = " $Repo_SHA
+echo "New Version- " $new_version
 
 UpdatedVer=$(cat ./VERSION)
 echo "Updated Version = " $UpdatedVer
