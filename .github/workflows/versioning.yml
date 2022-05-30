@@ -28,7 +28,7 @@ jobs:
           lastCommit=$(git log --format=%B -n 1 HEAD)
           echo "Last commit = " $lastCommit
           echo "::set-output name=message::$lastCommit"
-          
+          echo "ENV_MSG=${{needs.Execute_Versioning.outputs.ENV_MSG}}" >> $GITHUB_ENV
           ver_str=$(cat "VERSION")
           ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
           echo "Version string is $ver_extract_str"
