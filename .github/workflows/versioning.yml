@@ -3,29 +3,33 @@ on:
   pull_request:
     branches: [ main ]
     types: [closed]
-  push:
-     branches: [main]
-     paths-ignore:
-     - 'VERSION'
+  # push:
+  #    branches: [main]
+  #    paths-ignore:
+  #    - 'VERSION'
   workflow_dispatch:
 
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
-  ENV_MSG: ${{ github.event.head_commit.message }}
+  # ENV_MSG: $(git log -1 --pretty=format:"%s")  #${{ github.event.head_commit.message }}
 jobs:
   Execute_Versioning:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       ENV_GM: ${{ steps.setvar.outputs.gitmo }}
       ENV_VER: ${{ steps.setvar.outputs.sh_ver }}
+      ENV_MSG: ${{ steps.ci.outputs.message }}
     #if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
     steps:
     - uses: actions/checkout@v3
     - name: Run logic script
+      id: ci
       run: |
           lastCommit=$(git log --format=%B -n 1 HEAD)
           echo "Last commit = " $lastCommit
+          echo "::set-output name=message::$lastCommit"
+          
           ver_str=$(cat "VERSION")
           ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
           echo "Version string is $ver_extract_str"
@@ -36,7 +40,6 @@ jobs:
 
           lowerstr=$(echo $lastCommit |tr '[:upper:]' '[:lower:]')
           echo "transformed to lower = $lowerstr"
-          
           if [[ "$lowerstr" == *"#major"* ]]
           then
           echo "Found major in commit"
@@ -74,21 +77,25 @@ jobs:
           
           cat /dev/null > VERSION
           echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
-          newver_extract=$(cat "VERSION")
-          new_ver="$(cut -d' ' -f2 <<< "$newver_extract")"
+
+          # newver_extract=$(cat "VERSION")
+          # echo "new_extract - " $newver_extract
+          new_ver=$ver_major.$ver_minor.$ver_patch
+          # "$(cut -d' ' -f2 <<< "$newver_extract")"
+          echo "new_ver -" $new_ver
           echo "new_version=$new_ver" >> $GITHUB_ENV
-          echo "new_ver= " $new_ver
+         
+    - name: Push changes
+      run: |
+          echo "new_version= " $new_version
+          chmod +x ./script/push_ver_update.sh
+          ./script/push_ver_update.sh $ENV_TOKEN
 
     - name: Set variable
       id: setvar
       run: |
           echo "::set-output name=gitmo::$gitmojiko"
           echo "::set-output name=sh_ver::$new_version"
-
-    - name: Push changes
-      run: |
-          chmod +x ./script/push_ver_update.sh
-          ./script/push_ver_update.sh $ENV_TOKEN
 
   Create_Release:
    needs: Execute_Versioning
@@ -103,6 +110,7 @@ jobs:
           echo "VER output= ${{needs.Execute_Versioning.outputs.ENV_VER}}"
           echo "ENV_GM=${{needs.Execute_Versioning.outputs.ENV_GM}}" >> $GITHUB_ENV
           echo "ENV_VER=${{needs.Execute_Versioning.outputs.ENV_VER}}" >> $GITHUB_ENV
+          echo "ENV_MSG=${{needs.Execute_Versioning.outputs.ENV_MSG}}" >> $GITHUB_ENV
 
     - name: Creating Relesae Tag
       run: |    
