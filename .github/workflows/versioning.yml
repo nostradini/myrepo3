@@ -14,7 +14,7 @@ env:
   ENV_MSG: ${{ github.event.head_commit.message }}
 jobs:
   Execute_Versioning:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       ENV_GM: ${{ steps.setvar.outputs.gitmo }}
