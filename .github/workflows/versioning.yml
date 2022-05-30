@@ -1,12 +1,12 @@
 name: Versioning
 on:
-  # pull_request:
-  #   branches: [ main ]
-  #   types: [closed]
-  push:
-     branches: [main]
-     paths-ignore:
-     - 'VERSION'
+  pull_request:
+    branches: [ main ]
+    types: [closed]
+  # push:
+  #    branches: [main]
+  #    paths-ignore:
+  #    - 'VERSION'
   workflow_dispatch:
 
 env:
