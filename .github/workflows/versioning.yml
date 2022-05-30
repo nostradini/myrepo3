@@ -76,8 +76,9 @@ jobs:
           echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
           newver_extract=$(cat "VERSION")
           new_ver="$(cut -d' ' -f2 <<< "$newver_extract")"
+          echo "new_ver -" $new_ver
           echo "new_version=$new_ver" >> $GITHUB_ENV
-          echo "new_ver= " $new_version
+          echo "new_version= " $new_version
 
     - name: Push changes
       run: |
