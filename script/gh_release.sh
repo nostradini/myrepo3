@@ -16,6 +16,8 @@ tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
 
+echo "events= "${{ github.event.pull_request.title }}
+
 data="### $ENV_GM \n * $com_hash $ENV_MSG"
 echo "Data= " $data
 
