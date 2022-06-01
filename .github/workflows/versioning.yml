@@ -24,8 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    -name: Retrieve Defaults
+    - name: Retrieve Defaults
       run: |
-        echo "new_version= " $new_version
         chmod +x ./script/get_defaults.sh
         ./script/get_defaults.sh $ENV_TOKEN
