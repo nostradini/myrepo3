@@ -47,9 +47,9 @@ EOF
 
 echo "$(prep_post_data)"
 
-curl \
--X POST \
--H "Authorization: token $token" \
--H "Accept: application/vnd.github.v3+json" \
-https://api.github.com/repos/$user/$repo/releases  \
--d "$(prep_post_data)"
+# curl \
+# -X POST \
+# -H "Authorization: token $token" \
+# -H "Accept: application/vnd.github.v3+json" \
+# https://api.github.com/repos/$user/$repo/releases  \
+# -d "$(prep_post_data)"

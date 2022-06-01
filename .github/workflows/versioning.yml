@@ -23,97 +23,111 @@ jobs:
     #if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
     steps:
     - uses: actions/checkout@v3
-    - name: Run logic script
-      id: ci
+
+    -name: Retrieve Defaults
       run: |
-          lastCommit=$(git log --format=%B -n 1 HEAD)
-          echo "Last commit = " $lastCommit
-          echo "::set-output name=message::$lastCommit"
-          
-          ver_str=$(cat "VERSION")
-          ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
-          echo "Version string is $ver_extract_str"
-          ver_major="$(cut -d'.' -f1 <<< "$ver_extract_str")"
-          ver_minor="$(cut -d'.' -f2 <<< "$ver_extract_str")"
-          ver_patch="$(cut -d'.' -f3 <<< "$ver_extract_str")"
-          echo "ver_major=$ver_major,ver_minor=$ver_minor,ver_patch=$ver_patch"
+          targetD=$(curl \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  https://api.github.com/repos/$user/$repo/releases/latest | jq .created_at)
 
-          lowerstr=$(echo $lastCommit |tr '[:upper:]' '[:lower:]')
-          echo "transformed to lower = $lowerstr"
-          if [[ "$lowerstr" == *"#major"* ]]
-          then
-          echo "Found major in commit"
-          echo "gitmojiko=:boom: Breaking Changes" >> $GITHUB_ENV
-          ver_major=$((ver_major+1))
-          ver_minor=0
-          ver_patch=0
-          elif [[ "$lowerstr" == *"#minor"* ]]
-          then
-          echo "Found minor in commit"
-          echo "gitmojiko=:sparkles: New Features" >> $GITHUB_ENV
-          ver_minor=$((ver_minor+1))
-          ver_patch=0
-          elif [[ "$lowerstr" == *"#patch"* ]]
-          then
-          echo "Found patch in commit"
-          echo "gitmojiko=:bug: Bug Fixes" >> $GITHUB_ENV
-          ver_patch=$((ver_patch+1))
-          else
-          echo "Default condition"
-          echo "gitmojiko=:bug: Bug Fixes" >> $GITHUB_ENV
-          ver_patch=$((ver_patch+1))
-          fi
-          echo "ver_major=$ver_major,ver_minor=$ver_minor,ver_patch=$ver_patch"
-          
-          LenlastComm=${#lastCommit}
-          echo "size of commit is = " $LenlastComm
-          if [[ $LenlastComm -gt 50 ]]
-          then
-           trimLC="${lastCommit:0:50}..."
-          else
-           trimLC=${lastCommit}
-          fi
-          echo "trimmed = " $trimLC
-          
-          cat /dev/null > VERSION
-          echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
+          arrCom=()
+          while IFS= read -r line; do
+          arrCom+=( "$line" )
+          data="$data * ${line:0:7} - ${line:41:50} \n "
+          done < <( git log --after="$targetD" --format=oneline )
 
-          # newver_extract=$(cat "VERSION")
-          # echo "new_extract - " $newver_extract
-          new_ver=$ver_major.$ver_minor.$ver_patch
-          # "$(cut -d' ' -f2 <<< "$newver_extract")"
-          echo "new_ver -" $new_ver
-          echo "new_version=$new_ver" >> $GITHUB_ENV
+
+  #   - name: Run logic script
+  #     id: ci
+  #     run: |     
+  #         lastCommit=$(git log --format=%B -n 1 HEAD)
+  #         echo "Last commit = " $lastCommit
+  #         echo "::set-output name=message::$lastCommit"
+          
+  #         ver_str=$(cat "VERSION")
+  #         ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
+  #         echo "Version string is $ver_extract_str"
+  #         ver_major="$(cut -d'.' -f1 <<< "$ver_extract_str")"
+  #         ver_minor="$(cut -d'.' -f2 <<< "$ver_extract_str")"
+  #         ver_patch="$(cut -d'.' -f3 <<< "$ver_extract_str")"
+  #         echo "ver_major=$ver_major,ver_minor=$ver_minor,ver_patch=$ver_patch"
+
+  #         lowerstr=$(echo $lastCommit |tr '[:upper:]' '[:lower:]')
+  #         echo "transformed to lower = $lowerstr"
+  #         if [[ "$lowerstr" == *"#major"* ]]
+  #         then
+  #         echo "Found major in commit"
+  #         echo "gitmojiko=:boom: Breaking Changes" >> $GITHUB_ENV
+  #         ver_major=$((ver_major+1))
+  #         ver_minor=0
+  #         ver_patch=0
+  #         elif [[ "$lowerstr" == *"#minor"* ]]
+  #         then
+  #         echo "Found minor in commit"
+  #         echo "gitmojiko=:sparkles: New Features" >> $GITHUB_ENV
+  #         ver_minor=$((ver_minor+1))
+  #         ver_patch=0
+  #         elif [[ "$lowerstr" == *"#patch"* ]]
+  #         then
+  #         echo "Found patch in commit"
+  #         echo "gitmojiko=:bug: Bug Fixes" >> $GITHUB_ENV
+  #         ver_patch=$((ver_patch+1))
+  #         else
+  #         echo "Default condition"
+  #         echo "gitmojiko=:bug: Bug Fixes" >> $GITHUB_ENV
+  #         ver_patch=$((ver_patch+1))
+  #         fi
+  #         echo "ver_major=$ver_major,ver_minor=$ver_minor,ver_patch=$ver_patch"
+          
+  #         LenlastComm=${#lastCommit}
+  #         echo "size of commit is = " $LenlastComm
+  #         if [[ $LenlastComm -gt 50 ]]
+  #         then
+  #          trimLC="${lastCommit:0:50}..."
+  #         else
+  #          trimLC=${lastCommit}
+  #         fi
+  #         echo "trimmed = " $trimLC
+          
+  #         cat /dev/null > VERSION
+  #         echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
+
+  #         # newver_extract=$(cat "VERSION")
+  #         # echo "new_extract - " $newver_extract
+  #         new_ver=$ver_major.$ver_minor.$ver_patch
+  #         # "$(cut -d' ' -f2 <<< "$newver_extract")"
+  #         echo "new_ver -" $new_ver
+  #         echo "new_version=$new_ver" >> $GITHUB_ENV
          
-    - name: Push changes
-      run: |
-          echo "new_version= " $new_version
-          chmod +x ./script/push_ver_update.sh
-          ./script/push_ver_update.sh $ENV_TOKEN
+  #   - name: Push changes
+  #     run: |
+  #         echo "new_version= " $new_version
+  #         chmod +x ./script/push_ver_update.sh
+  #         ./script/push_ver_update.sh $ENV_TOKEN
 
-    - name: Set variable
-      id: setvar
-      run: |
-          echo "::set-output name=gitmo::$gitmojiko"
-          echo "::set-output name=sh_ver::$new_version"
+  #   - name: Set variable
+  #     id: setvar
+  #     run: |
+  #         echo "::set-output name=gitmo::$gitmojiko"
+  #         echo "::set-output name=sh_ver::$new_version"
 
-  Create_Release:
-   needs: Execute_Versioning
-   runs-on: ubuntu-latest
-   steps:
-    - uses: actions/checkout@v3
-      with: 
-          fetch-depth: 0
-    - name: Validating Version
-      run: |
-          echo "GM output= ${{needs.Execute_Versioning.outputs.ENV_GM}}"
-          echo "VER output= ${{needs.Execute_Versioning.outputs.ENV_VER}}"
-          echo "ENV_GM=${{needs.Execute_Versioning.outputs.ENV_GM}}" >> $GITHUB_ENV
-          echo "ENV_VER=${{needs.Execute_Versioning.outputs.ENV_VER}}" >> $GITHUB_ENV
-          echo "ENV_MSG=${{needs.Execute_Versioning.outputs.ENV_MSG}}" >> $GITHUB_ENV
+  # Create_Release:
+  #  needs: Execute_Versioning
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #   - uses: actions/checkout@v3
+  #     with: 
+  #         fetch-depth: 0
+  #   - name: Validating Version
+  #     run: |
+  #         echo "GM output= ${{needs.Execute_Versioning.outputs.ENV_GM}}"
+  #         echo "VER output= ${{needs.Execute_Versioning.outputs.ENV_VER}}"
+  #         echo "ENV_GM=${{needs.Execute_Versioning.outputs.ENV_GM}}" >> $GITHUB_ENV
+  #         echo "ENV_VER=${{needs.Execute_Versioning.outputs.ENV_VER}}" >> $GITHUB_ENV
+  #         echo "ENV_MSG=${{needs.Execute_Versioning.outputs.ENV_MSG}}" >> $GITHUB_ENV
 
-    - name: Creating Relesae Tag
-      run: |    
-          chmod +x ./script/gh_release.sh
-          ./script/gh_release.sh $ENV_TOKEN
+  #   - name: Creating Relesae Tag
+  #     run: |    
+  #         chmod +x ./script/gh_release.sh
+  #         ./script/gh_release.sh $ENV_TOKEN
 
