@@ -1,7 +1,6 @@
 # !/usr/bin/bash
 user="$(git log -n 1 --pretty=format:%an)"
 repo="myrepo3"
-# target="$(git symbolic-ref --short HEAD)"
 com_hash="$(git rev-parse --short HEAD)"
 token=$1
 tag=$ENV_VER
@@ -16,9 +15,20 @@ tag=\"${tag}\"
 vtag=\"${vtag}\"
 echo $tag $vtag
 
-echo "events= "${{ github.event.pull_request.title }}
+targetD=$(curl \
+-H "Accept: application/vnd.github.v3+json" \
+https://api.github.com/repos/nostradini/git_beginner/releases/latest | jq .created_at)
 
-data="### $ENV_GM \n * $com_hash $ENV_MSG"
+echo "target date= $targetD"
+data="### $ENV_GM \n "
+
+arrCom=()
+while IFS= read -r line; do
+    arrCom+=( "$line" )
+    # echo "arrCom = " ${line:0:7}
+    # echo ${line:41:50}
+    data="$data * ${line:0:7} - ${line:41:50} \n "
+done < <( git log --after="$targetD" --format=oneline )
 echo "Data= " $data
 
 prep_post_data()
