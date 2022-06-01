@@ -8,7 +8,7 @@ tag=$ENV_VER
 echo "END_GM= " $ENV_GM
 echo "ENV_VER= " $ENV_VER
 echo "User= " $user
-echo "Message= " $ENV_MSG
+# echo "Message= " $ENV_MSG
 
 vtag="v$tag"
 tag=\"${tag}\"
@@ -17,7 +17,7 @@ echo $tag $vtag
 
 targetD=$(curl \
 -H "Accept: application/vnd.github.v3+json" \
-https://api.github.com/repos/nostradini/git_beginner/releases/latest | jq .created_at)
+https://api.github.com/repos/$user/$repo/releases/latest | jq .created_at)
 
 echo "target date= $targetD"
 data="### $ENV_GM \n "
