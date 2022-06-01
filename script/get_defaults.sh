@@ -11,4 +11,5 @@ while IFS= read -r line; do
 arrCom+=( "$line" )
 data="$data * ${line:0:7} - ${line:41:50} \n "
 done < <( git log --after="$targetD" --format=oneline )
+
 echo ${#arrCom[@]}
