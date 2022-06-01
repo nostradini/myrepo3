@@ -35,6 +35,7 @@ jobs:
           arrCom+=( "$line" )
           data="$data * ${line:0:7} - ${line:41:50} \n "
           done < <( git log --after="$targetD" --format=oneline )
+          echo ${#arrCom[@]}
 
 
   #   - name: Run logic script
