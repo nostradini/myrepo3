@@ -1,8 +1,8 @@
 name: Versioning
 on:
-  pull_request:
-    branches: [ main ]
-    types: [closed]
+  # pull_request:
+  #   branches: [ main ]
+  #   types: [closed]
   # push:
   #    branches: [main]
   #    paths-ignore:
@@ -11,92 +11,67 @@ on:
 
 env:
   ENV_TOKEN: ${{ secrets.DOOR }}
-  # ENV_MSG: $(git log -1 --pretty=format:"%s")  #${{ github.event.head_commit.message }}
+  REPO: "myrepo3"
 jobs:
   Execute_Versioning:
     # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
-      ENV_GM: ${{ steps.setvar.outputs.gitmo }}
-      ENV_VER: ${{ steps.setvar.outputs.sh_ver }}
-      ENV_MSG: ${{ steps.ci.outputs.message }}
-    #if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
+      LASTCOM: Last commit
+      USER: GitHub User
+      envgitmojiko: Change type
+      envMajor: colMajor
+      envMinor: colMinor
+      envPatch: colPatch
+      envVersion: New version
+    # if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
+    
     steps:
     - uses: actions/checkout@v3
-    - name: Run logic script
-      id: ci
-      run: |     
-          lastCommit=$(git log --format=%B -n 1 HEAD)
-          echo "Last commit = " $lastCommit
-          echo "::set-output name=message::$lastCommit"
-          
-          ver_str=$(cat "VERSION")
-          ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
-          echo "Version string is $ver_extract_str"
-          ver_major="$(cut -d'.' -f1 <<< "$ver_extract_str")"
-          ver_minor="$(cut -d'.' -f2 <<< "$ver_extract_str")"
-          ver_patch="$(cut -d'.' -f3 <<< "$ver_extract_str")"
-          echo "ver_major=$ver_major,ver_minor=$ver_minor,ver_patch=$ver_patch"
+      with:
+        fetch-depth: 0
 
-          lowerstr=$(echo $lastCommit |tr '[:upper:]' '[:lower:]')
-          echo "transformed to lower = $lowerstr"
-          if [[ "$lowerstr" == *"#major"* ]]
-          then
-          echo "Found major in commit"
-          echo "gitmojiko=:boom: Breaking Changes" >> $GITHUB_ENV
-          ver_major=$((ver_major+1))
-          ver_minor=0
-          ver_patch=0
-          elif [[ "$lowerstr" == *"#minor"* ]]
-          then
-          echo "Found minor in commit"
-          echo "gitmojiko=:sparkles: New Features" >> $GITHUB_ENV
-          ver_minor=$((ver_minor+1))
-          ver_patch=0
-          elif [[ "$lowerstr" == *"#patch"* ]]
-          then
-          echo "Found patch in commit"
-          echo "gitmojiko=:bug: Bug Fixes" >> $GITHUB_ENV
-          ver_patch=$((ver_patch+1))
-          else
-          echo "Default condition"
-          echo "gitmojiko=:bug: Bug Fixes" >> $GITHUB_ENV
-          ver_patch=$((ver_patch+1))
-          fi
-          echo "ver_major=$ver_major,ver_minor=$ver_minor,ver_patch=$ver_patch"
-          
-          LenlastComm=${#lastCommit}
-          echo "size of commit is = " $LenlastComm
-          if [[ $LenlastComm -gt 50 ]]
-          then
-           trimLC="${lastCommit:0:50}..."
-          else
-           trimLC=${lastCommit}
-          fi
-          echo "trimmed = " $trimLC
-          
-          cat /dev/null > VERSION
-          echo -n "Version $ver_major.$ver_minor.$ver_patch - $trimLC" > VERSION
+    - name: Run Checkpoints
+      id: value
+      run: |
+        chmod +x ./script/initialize_checkpoints.sh
+        ./script/initialize_checkpoints.sh
 
-          # newver_extract=$(cat "VERSION")
-          # echo "new_extract - " $newver_extract
-          new_ver=$ver_major.$ver_minor.$ver_patch
-          # "$(cut -d' ' -f2 <<< "$newver_extract")"
-          echo "new_ver -" $new_ver
-          echo "new_version=$new_ver" >> $GITHUB_ENV
+    - name: Check current version
+      run: |
+        ver_str=$(cat "VERSION")
+        ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
+        echo "Version string is $ver_extract_str"
+        cur_major="$(cut -d'.' -f1 <<< "$ver_extract_str")"
+        cur_minor="$(cut -d'.' -f2 <<< "$ver_extract_str")"
+        cur_patch="$(cut -d'.' -f3 <<< "$ver_extract_str")"
+        echo "curmajor=$cur_major" >> $GITHUB_ENV
+        echo "curminor=$cur_minor" >> $GITHUB_ENV
+        echo "curpatch=$cur_patch" >> $GITHUB_ENV
+        echo "lcommit=${{ steps.value.outputs.LASTCOM }}" >> $GITHUB_ENV
+        echo "envUSER=${{ steps.value.outputs.USER }}" >> $GITHUB_ENV
+        echo "OLD= major=$cur_major, minor=$cur_minor, patch=$cur_patch"
+
+    - name: Apply Logic
+      id: logic
+      run: |
+        chmod +x ./script/do_logic.sh
+        ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO
+
+    - name: Push New Version
+      run: |
+        echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
+        echo "Version=${{ steps.logic.outputs.envVersion }}" >> $GITHUB_ENV
+        echo "Major=${{ steps.logic.outputs.envMajor }}" >> $GITHUB_ENV
+        echo "Minor=${{ steps.logic.outputs.envMinor }}" >> $GITHUB_ENV
+        echo "Patch=${{ steps.logic.outputs.envPatch }}" >> $GITHUB_ENV
+        echo "Gitmojiko = ${{ steps.logic.outputs.envgitmojiko }}"
+        if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
+        then
+        chmod +x ./script/version_update.sh
+        ./script/version_update.sh $ENV_TOKEN "$envUSER" $REPO
+        fi
          
-    - name: Push changes
-      run: |
-          echo "new_version= " $new_version
-          chmod +x ./script/push_ver_update.sh
-          ./script/push_ver_update.sh $ENV_TOKEN
-
-    - name: Set variable
-      id: setvar
-      run: |
-          echo "::set-output name=gitmo::$gitmojiko"
-          echo "::set-output name=sh_ver::$new_version"
-
   Create_Release:
    needs: Execute_Versioning
    runs-on: ubuntu-latest
@@ -104,16 +79,26 @@ jobs:
     - uses: actions/checkout@v3
       with: 
           fetch-depth: 0
-    - name: Validating Version
+
+    - name: Release Tagging
       run: |
-          echo "GM output= ${{needs.Execute_Versioning.outputs.ENV_GM}}"
-          echo "VER output= ${{needs.Execute_Versioning.outputs.ENV_VER}}"
-          echo "ENV_GM=${{needs.Execute_Versioning.outputs.ENV_GM}}" >> $GITHUB_ENV
-          echo "ENV_VER=${{needs.Execute_Versioning.outputs.ENV_VER}}" >> $GITHUB_ENV
-          echo "ENV_MSG=${{needs.Execute_Versioning.outputs.ENV_MSG}}" >> $GITHUB_ENV
+        echo "commit count=${{ needs.Execute_Versioning.outputs.COUNTER }}" >> $GITHUB_ENV
+        echo "last commit=${{ needs.Execute_Versioning.outputs.LASTCOM }}" >> $GITHUB_ENV
+        echo "Gitmojiko = $Gitmojiko"
+        if [[ "$Gitmojiko" != "UNRELEASED" ]]
+        then 
+        chmod +x ./script/releaseNOTES.sh
+        ./script/releaseNOTES.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO
+        fi
 
-    - name: Creating Relesae Tag
-      run: |    
-          chmod +x ./script/gh_release.sh
-          ./script/gh_release.sh $ENV_TOKEN
-
+    - name: TEST VALUE
+      run: |
+        echo "commit count= ${{ needs.Execute_Versioning.outputs.COUNTER }}"
+        echo "last commit= ${{ needs.Execute_Versioning.outputs.LASTCOM }}"
+        echo "envuser= ${{ needs.Execute_Versioning.outputs.USER }}"
+        echo "REPO= $REPO"
+        echo "envgitmojiko= ${{ needs.Execute_Versioning.outputs.envgitmojiko }}"
+        echo "envMajor= ${{ needs.Execute_Versioning.outputs.envMajor }}"
+        echo "envMinor= ${{ needs.Execute_Versioning.outputs.envMinor }}"
+        echo "envPatch= ${{ needs.Execute_Versioning.outputs.envPatch }}"
+        echo "envVersion= ${{ needs.Execute_Versioning.outputs.envVersion }}"
