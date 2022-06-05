@@ -21,6 +21,7 @@ if [[ ${#envPt} != 0 ]]
 then PtTitle="\n - #### Patches  "
 fi
 
+echo "url = https://api.github.com/repos/$user/$repo/releases/latest"
 
 tag=$(curl \
 -H "Accept: application/vnd.github.v3+json" \
