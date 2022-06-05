@@ -1,5 +1,4 @@
 # !/usr/bin/bash
-
 gUSER="$(git log -n 1 --pretty=format:%an)"
 lastCommit=$(git log --format=%B -n 1 HEAD)
 echo "Last commit = $lastCommit" 

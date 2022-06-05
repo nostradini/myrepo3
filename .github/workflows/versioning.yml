@@ -83,12 +83,12 @@ jobs:
     - name: Import values
       run: |
         # echo "last commit= ${{ needs.Execute_Versioning.outputs.LASTCOM }}"
-        echo "envUSER= ${{ needs.Execute_Versioning.outputs.USER }}" >> $GITHUB_ENV
-        echo "Gitmojiko= ${{ needs.Execute_Versioning.outputs.envgitmojiko }}" >> $GITHUB_ENV
-        echo "Major= ${{ needs.Execute_Versioning.outputs.envMajor }}" >> $GITHUB_ENV
-        echo "Minor= ${{ needs.Execute_Versioning.outputs.envMinor }}" >> $GITHUB_ENV
-        echo "Patch= ${{ needs.Execute_Versioning.outputs.envPatch }}" >> $GITHUB_ENV
-        echo "Version= ${{ needs.Execute_Versioning.outputs.envVersion }}" >> $GITHUB_ENV
+        echo "envUSER=${{ needs.Execute_Versioning.outputs.USER }}" >> $GITHUB_ENV
+        echo "Gitmojiko=${{ needs.Execute_Versioning.outputs.envgitmojiko }}" >> $GITHUB_ENV
+        echo "Major=${{ needs.Execute_Versioning.outputs.envMajor }}" >> $GITHUB_ENV
+        echo "Minor=${{ needs.Execute_Versioning.outputs.envMinor }}" >> $GITHUB_ENV
+        echo "Patch=${{ needs.Execute_Versioning.outputs.envPatch }}" >> $GITHUB_ENV
+        echo "Version=${{ needs.Execute_Versioning.outputs.envVersion }}" >> $GITHUB_ENV
 
     - name: Release tagging
       run: |
