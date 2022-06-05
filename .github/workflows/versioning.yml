@@ -31,7 +31,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Run Checkpoints
+    - name: Run checkpoints
       id: value
       run: |
         chmod +x ./script/checkpoints.sh
@@ -52,13 +52,13 @@ jobs:
         echo "envUSER=${{ steps.value.outputs.USER }}" >> $GITHUB_ENV
         echo "OLD= major=$cur_major, minor=$cur_minor, patch=$cur_patch"
 
-    - name: Apply Logic
+    - name: Apply logic
       id: logic
       run: |
         chmod +x ./script/do_logic.sh
         ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO
 
-    - name: Push New Version
+    - name: Push new version
       run: |
         echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
         echo "Version=${{ steps.logic.outputs.envVersion }}" >> $GITHUB_ENV
@@ -80,7 +80,17 @@ jobs:
       with: 
           fetch-depth: 0
 
-    - name: Release Tagging
+    - name: Import values
+      run: |
+        # echo "last commit= ${{ needs.Execute_Versioning.outputs.LASTCOM }}"
+        echo "envUSER= ${{ needs.Execute_Versioning.outputs.USER }}" >> $GITHUB_ENV
+        echo "Gitmojiko= ${{ needs.Execute_Versioning.outputs.envgitmojiko }}" >> $GITHUB_ENV
+        echo "Major= ${{ needs.Execute_Versioning.outputs.envMajor }}" >> $GITHUB_ENV
+        echo "Minor= ${{ needs.Execute_Versioning.outputs.envMinor }}" >> $GITHUB_ENV
+        echo "Patch= ${{ needs.Execute_Versioning.outputs.envPatch }}" >> $GITHUB_ENV
+        echo "Version= ${{ needs.Execute_Versioning.outputs.envVersion }}" >> $GITHUB_ENV
+
+    - name: Release tagging
       run: |
         echo "commit count=${{ needs.Execute_Versioning.outputs.COUNTER }}" >> $GITHUB_ENV
         echo "last commit=${{ needs.Execute_Versioning.outputs.LASTCOM }}" >> $GITHUB_ENV
