@@ -17,13 +17,13 @@ jobs:
     # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
-      LASTCOM: Last commit
-      USER: GitHub User
-      envgitmojiko: Change type
-      envMajor: colMajor
-      envMinor: colMinor
-      envPatch: colPatch
-      envVersion: New version
+      LASTCOM: ${{ steps.value.outputs.LASTCOM }}
+      USER: ${{ steps.value.outputs.USER }}
+      envgitmojiko: ${{ steps.logic.outputs.envgitmojiko }}
+      envMajor: ${{ steps.logic.outputs.envMajor }}
+      envMinor: ${{ steps.logic.outputs.envMinor }}
+      envPatch: ${{ steps.logic.outputs.envPatch }}
+      envVersion: ${{ steps.logic.outputs.envVersion }}
     # if: "!contains(github.event.head_commit.message, '[JOB] Push version')"
     
     steps:
@@ -34,8 +34,8 @@ jobs:
     - name: Run Checkpoints
       id: value
       run: |
-        chmod +x ./script/initialize_checkpoints.sh
-        ./script/initialize_checkpoints.sh
+        chmod +x ./script/checkpoints.sh
+        ./script/checkpoints.sh
 
     - name: Check current version
       run: |
@@ -93,7 +93,6 @@ jobs:
 
     - name: TEST VALUE
       run: |
-        echo "commit count= ${{ needs.Execute_Versioning.outputs.COUNTER }}"
         echo "last commit= ${{ needs.Execute_Versioning.outputs.LASTCOM }}"
         echo "envuser= ${{ needs.Execute_Versioning.outputs.USER }}"
         echo "REPO= $REPO"
