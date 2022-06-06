@@ -100,7 +100,7 @@ jobs:
         fi
                 
   Create_Changelog:
-   needs: Execute_Versioning
+   needs: Create_Release
    runs-on: ubuntu-latest
    steps:
     - uses: actions/checkout@v3
