@@ -99,11 +99,16 @@ jobs:
         ./script/releaseNOTES.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO
         fi
                 
-  Create_Changelog:
-   needs: Create_Release
-   runs-on: ubuntu-latest
-   steps:
-    - uses: actions/checkout@v3
+    - name: Create changelog
+      run: |  
+        echo "commit count=${{ needs.Execute_Versioning.outputs.COUNTER }}" >> $GITHUB_ENV
+        echo "last commit=${{ needs.Execute_Versioning.outputs.LASTCOM }}" >> $GITHUB_ENV
+        echo "Gitmojiko = $Gitmojiko"
+        # if [[ "$Gitmojiko" != "UNRELEASED" ]]
+        # then 
+        # chmod +x ./script/releaseNOTES.sh
+        # ./script/releaseNOTES.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO
+        # fi
 
     - name: TEST VALUE
       run: |
