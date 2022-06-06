@@ -10,7 +10,7 @@ bMinor=false
 bPatch=false
 bDefault=false
 
-echo "User= $USER , REPO= $REPO"
+echo "User= $USER , REPO= $repo"
 
 targetD=$(curl \
 -H "Accept: application/vnd.github.v3+json" \

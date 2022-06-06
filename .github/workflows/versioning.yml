@@ -77,8 +77,6 @@ jobs:
    runs-on: ubuntu-latest
    steps:
     - uses: actions/checkout@v3
-      with: 
-          fetch-depth: 0
 
     - name: Import values
       run: |
@@ -100,6 +98,12 @@ jobs:
         chmod +x ./script/releaseNOTES.sh
         ./script/releaseNOTES.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO
         fi
+                
+  Create_Changelog:
+   needs: Execute_Versioning
+   runs-on: ubuntu-latest
+   steps:
+    - uses: actions/checkout@v3
 
     - name: TEST VALUE
       run: |
