@@ -19,3 +19,8 @@ echo $(date +'%Y-%m-%d')
 echo $(date +'%T')
 echo "Generated Date= $varDate"
 echo "targetD= $targetD"
+
+echo "::set-output name=LASTCOM::$lastCommit"
+echo "::set-output name=USER::$gUSER"
+echo "::set-output name=envDATE::$varDate"
+echo "::set-output name=envTDATE::$targetD"
