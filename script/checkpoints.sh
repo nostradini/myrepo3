@@ -6,6 +6,8 @@ echo "Last commit = $lastCommit"
 echo "Git User = $gUSER"
 echo "REPO= $repo"
 
+echo $(date +'%Y-%m-%d')
+echo $(date +'%T')
 # d1="$(date +'%Y-%m-%d')"
 # d2="$(date +'%T')"
 # d2=$(echo $d2 | tr -d ':')
@@ -24,6 +26,6 @@ echo "::set-output name=envDATE::$varDate"
 echo "tag= $tag"
 echo "targetD= $targetD"
 
-echo "::set-output name=LASTCOM::$lastCommit"
-echo "::set-output name=USER::$gUSER"
-echo "::set-output name=envTDATE::$targetD"
+# echo "::set-output name=LASTCOM::$lastCommit"
+# echo "::set-output name=USER::$gUSER"
+# echo "::set-output name=envTDATE::$targetD"
