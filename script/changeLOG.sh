@@ -49,37 +49,6 @@ then
 fi
 done < <( git log --after="$targetD" --format=oneline )
 
-# if [[ $bMajor == true ]]
-# then
-#     gitmojiko=":boom: Breaking Changes"
-#     ver_major=$((ver_major+1))
-#     ver_minor=0
-#     ver_patch=0
-# elif [[ $bMinor == true ]]
-# then
-#     gitmojiko=":sparkles: New Features"
-#     ver_minor=$((ver_minor+1))
-#     ver_patch=0
-# elif [[ $bPatch == true ]]
-# then
-#     gitmojiko=":bug: Bug Fixes"
-#     ver_patch=$((ver_patch+1))
-# else
-#     gitmojiko="UNRELEASED"
-# fi
-# echo "gitmojiko= $gitmojiko"
-# echo "colMajor= $colMajor"
-# echo "colMinor= $colMinor"
-# echo "colPatch= $colPatch"
-
-
-
-# d1=$(date +"%Y-%m-%d")
-# d2=$(date +"%T")
-# d2=$(echo $d2 | tr -d ':')
-# varDate="$d1-$d2"
-
-
 if [[ ${#colMajor} != 0 ]]
 then
     MjTitle="<ul><li><h4>Major Changes</h4></li>"
@@ -118,13 +87,15 @@ then
 
 fi
 newVER="v$newVER"
+path="CHANGELOG.md"
+copyCL=$(cat ./$path)
+
 # echo "Updated Version = " $UpdatedVer
 # echo "MjTitle=$MjTitle,MnTitle=$MnTitle,PtTitle=$PtTitle"
-content="<h1>CHANGELOG</h1><h2>$newVER - $varDate</h2><h3>$gitmojiko</h3> $MjTitle $colMajor $MnTitle $colMinor $PtTitle $colPatch"
+content="<h1>CHANGELOG</h1><h2>$newVER - $varDate</h2><h3>$gitmojiko</h3> $MjTitle $colMajor $MnTitle $colMinor $PtTitle $colPatch <br> $copyCL"
 
 echo "content= $content"
-# UpdatedVer=$(cat ./$path)
-path="CHANGELOG.md"
+
 echo "path= $path"
 
 Repo_SHA=$(curl -H "Authorization: token $Env_Token" \
