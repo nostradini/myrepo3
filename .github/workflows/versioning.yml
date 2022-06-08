@@ -1,9 +1,9 @@
 name: Versioning
 on:
-  # pull_request:
-  #   branches: [ main ]
-  #   types: [closed]
-      paths-ignore:
+  pull_request:
+    branches: [ main ]
+    types: [closed]
+    paths-ignore:
       - 'VERSION'
       - 'CHANGELOG.md'
   # push:
