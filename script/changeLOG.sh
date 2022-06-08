@@ -89,10 +89,11 @@ fi
 newVER="v$newVER"
 path="CHANGELOG.md"
 copyCL=$(cat ./$path)
+copyCL=$(echo $copyCL | tr -d '<h1>CHANGELOG</h1>')
 
 # echo "Updated Version = " $UpdatedVer
 # echo "MjTitle=$MjTitle,MnTitle=$MnTitle,PtTitle=$PtTitle"
-content="<h1>CHANGELOG</h1><h2>$newVER - $varDate</h2><h3>$gitmojiko</h3> $MjTitle $colMajor $MnTitle $colMinor $PtTitle $colPatch <br> $copyCL"
+content="<h1>CHANGELOG</h1><h2>$newVER - $varDate</h2><h3>$gitmojiko</h3> $MjTitle $colMajor $MnTitle $colMinor $PtTitle $colPatch $copyCL"
 
 echo "content= $content"
 
