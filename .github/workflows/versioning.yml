@@ -37,8 +37,8 @@ jobs:
       id: value
       shell: bash
       run: |
-        chmod +x ./script/checkpoints.sh
-        ./script/checkpoints.sh
+        chmod +x ./script/test.sh
+        ./script/test.sh
 
   #   - name: Check current version
   #     run: |
