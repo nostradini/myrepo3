@@ -58,9 +58,9 @@ jobs:
     - name: Apply logic
       id: logic
       run: |
+        echo "TargetDate= $TDate"
         chmod +x ./script/do_logic.sh
         ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDate"
-        echo "TargetDate= $TDate"
 
     - name: Push new version
       run: |
