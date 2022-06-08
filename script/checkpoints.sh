@@ -6,6 +6,7 @@ echo "Last commit = $lastCommit"
 echo "::set-output name=LASTCOM::$lastCommit"
 echo "Git User = $gUSER" 
 echo "::set-output name=USER::$gUSER"
+echo "REPO= $repo"
 
 d1=$(date +"%Y-%m-%d")
 d2=$(date +"%T")
@@ -16,6 +17,6 @@ echo "::set-output name=envDATE::$varDate"
 
 targetD=$(curl \
 -H "Accept: application/vnd.github.v3+json" \
-https://api.github.com/repos/$user/$repo/releases/latest | jq .created_at)
+https://api.github.com/repos/$gUSER/$repo/releases/latest | jq .created_at)
 
 echo "::set-output name=envTDATE::$targetD" 
