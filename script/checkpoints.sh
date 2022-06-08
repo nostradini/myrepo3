@@ -7,10 +7,10 @@ echo "Git User = $gUSER"
 echo "REPO= $repo"
 echo $(date +'%Y-%m-%d')
 echo $(date +'%T')
-# d1="$(date +'%Y-%m-%d')"
-# d2="$(date +'%T')"
+d1=$(date +'%Y-%m-%d')
+d2=$(date +'%T')
 # d2=$(echo $d2 | tr -d ':')
-# varDate="$d1-$d2"
+varDate="$d1-$d2"
 echo "Generated Date= $varDate"
 echo "::set-output name=envDATE::$varDate"
 # targetD=$(curl \
