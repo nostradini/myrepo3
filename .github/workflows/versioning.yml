@@ -69,7 +69,7 @@ jobs:
 
     - name: Push new version
       run: |
-        echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
+        # echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
         # echo "Version=${{ steps.logic.outputs.envVersion }}" >> $GITHUB_ENV
         # echo "Major=${{ steps.logic.outputs.envMajor }}" >> $GITHUB_ENV
         # echo "Minor=${{ steps.logic.outputs.envMinor }}" >> $GITHUB_ENV
