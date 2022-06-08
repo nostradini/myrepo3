@@ -1,1 +1,1 @@
-<h1>CHANGELOG</h1><h2>2.7.0 - 2022-06-08-131914</h2><h3>:sparkles: New Features</h3> <ul><br><li><h4>Minor Changes</h4></li> <ul><h5> <li><a href='https://github.com/nostradini/myrepo3/commit/7aaa834'> 7aaa834 </a> - #minor home it to work </li></h5></ul></ul>
+<h1>CHANGELOG</h1><h2>v2.7.1 - 2022-06-08-132642</h2><h3>:bug: Bug Fixes</h3> <ul><br><li><h4>Patches</h4></li> <ul><h5> <li><a href='https://github.com/nostradini/myrepo3/commit/338e844'> 338e844 </a> - one more on #patch </li></h5></ul></ul>
