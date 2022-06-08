@@ -3,11 +3,14 @@ on:
   # pull_request:
   #   branches: [ main ]
   #   types: [closed]
-  push:
-     branches: [main]
-     paths-ignore:
-     - 'VERSION'
-     - 'CHANGELOG.md'
+      paths-ignore:
+      - 'VERSION'
+      - 'CHANGELOG.md'
+  # push:
+  #    branches: [main]
+  #    paths-ignore:
+  #    - 'VERSION'
+  #    - 'CHANGELOG.md'
 
   workflow_dispatch:
 

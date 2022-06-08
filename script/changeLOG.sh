@@ -112,7 +112,7 @@ then
     PtTitle="<li><h4>Patches</h4></li>"
     colPatch="<ul><h5>$colPatch</h5></ul></ul>"
     else
-    PtTitle="<ul><br><li><h4>Patches</h4></li>"
+    PtTitle="<ul><li><h4>Patches</h4></li>"
     colPatch="<ul><h5>$colPatch</h5></ul></ul>"
     fi
 
