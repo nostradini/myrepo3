@@ -8,6 +8,7 @@ envMn=$4
 envPt=$5
 user=$6
 repo=$7
+date=$8
 echo "user= $user , repo= $repo"
 echo "cred = $ENV_TOKEN"
 
@@ -39,7 +40,7 @@ prep_data()
 {
   "tag_name": "$envVer",
   "target_commitish":"main" , 
-  "name": "v$envVer - $(date "+%F-%H-%M-%S")" ,
+  "name": "v$envVer - $date" ,
   "body": "$data" ,
   "draft":false,"prerelease":false,
   "generate_release_notes":false

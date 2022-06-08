@@ -5,20 +5,20 @@ ver_patch=$3
 user=$4
 trLC=$5
 repo=$6
+targetD=$7
 bMajor=false
 bMinor=false
 bPatch=false
 bDefault=false
 
 echo "User= $USER , REPO= $repo"
+echo "Date = $targetD"
 
-targetD=$(curl \
--H "Accept: application/vnd.github.v3+json" \
-https://api.github.com/repos/$user/$repo/releases/latest | jq .created_at)
+# targetD=$(curl \
+# -H "Accept: application/vnd.github.v3+json" \
+# https://api.github.com/repos/$user/$repo/releases/latest | jq .created_at)
 
 # targetD="2022-06-03T02:00:00Z"
-
-echo "Date = $targetD"
 
 # arrCom=()
 while IFS= read -r line; do
