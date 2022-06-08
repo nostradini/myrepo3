@@ -96,7 +96,7 @@ then
     then
     MnTitle="<li><h4>Minor Changes</h4></li>"
     else
-    MnTitle="<ul><br><li><h4>Minor Changes</h4></li>"
+    MnTitle="<ul><li><h4>Minor Changes</h4></li>"
     fi
     if [[ ${#colPatch} != 0 ]]
     then
@@ -117,7 +117,7 @@ then
     fi
 
 fi
-
+newVER="v$newVER"
 # echo "Updated Version = " $UpdatedVer
 # echo "MjTitle=$MjTitle,MnTitle=$MnTitle,PtTitle=$PtTitle"
 content="<h1>CHANGELOG</h1><h2>$newVER - $varDate</h2><h3>$gitmojiko</h3> $MjTitle $colMajor $MnTitle $colMinor $PtTitle $colPatch"
