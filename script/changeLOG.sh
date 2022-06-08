@@ -17,7 +17,9 @@ bDefault=false
 # targetD="2022-06-01T00:00:00Z"
 echo "User= $user , REPO= $repo"
 echo "varDate= $varDate"
-echo "Date = $targetD"
+echo "targetDate = $targetD"
+echo "newVer= $newVER"
+echo "varDATE= $varDate"
 
 while IFS= read -r line; do
 lowerstr=$(echo ${line:41:50}|tr '[:upper:]' '[:lower:]')
@@ -70,14 +72,13 @@ done < <( git log --after="$targetD" --format=oneline )
 # echo "colMinor= $colMinor"
 # echo "colPatch= $colPatch"
 
-newVER="v$ver_major.$ver_minor.$ver_patch"
-echo "newVer= $newVER"
+
 
 # d1=$(date +"%Y-%m-%d")
 # d2=$(date +"%T")
 # d2=$(echo $d2 | tr -d ':')
 # varDate="$d1-$d2"
-echo "varDATE= $varDate"
+
 
 if [[ ${#colMajor} != 0 ]]
 then
@@ -122,9 +123,8 @@ fi
 content="<h1>CHANGELOG</h1><h2>$newVER - $varDate</h2><h3>$gitmojiko</h3> $MjTitle $colMajor $MnTitle $colMinor $PtTitle $colPatch"
 
 echo "content= $content"
-
-path="CHANGELOG.md"
 # UpdatedVer=$(cat ./$path)
+path="CHANGELOG.md"
 echo "path= $path"
 
 Repo_SHA=$(curl -H "Authorization: token $Env_Token" \

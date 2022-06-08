@@ -15,8 +15,8 @@ targetD=$(curl \
 echo "Last commit = $lastCommit" 
 echo "Git User = $gUSER"
 echo "REPO= $repo"
-echo $(date +'%Y-%m-%d')
-echo $(date +'%T')
+# echo $(date +'%Y-%m-%d')
+# echo $(date +'%T')
 echo "Generated Date= $varDate"
 echo "targetD= $targetD"
 

@@ -7,6 +7,8 @@ on:
      branches: [main]
      paths-ignore:
      - 'VERSION'
+     - 'CHANGELOG.md'
+
   workflow_dispatch:
 
 env:
@@ -109,14 +111,14 @@ jobs:
                 
     - name: Create changelog
       run: |
+        echo "Gitmojiko = $Gitmojiko"
+        echo "DATE = $Date"
+        echo "TargetDate= $TDate"
         if [[ "$Gitmojiko" != "UNRELEASED" ]]
         then 
         chmod +x ./script/changeLOG.sh
         ./script/changeLOG.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date" "$TDate"
         fi
-        echo "Gitmojiko = $Gitmojiko"
-        echo "DATE = $Date"
-        echo "TargetDate= $TDate"
  
     - name: TEST VALUE
       run: |
@@ -129,4 +131,4 @@ jobs:
         echo "envPatch= ${{ needs.Execute_Versioning.outputs.envPatch }}"
         echo "envVersion= ${{ needs.Execute_Versioning.outputs.envVersion }}"
         echo "Date= ${{ needs.Execute_Versioning.outputs.envDATE }}"
-        echo "TDate= ${{ needs.Execute_Versioning.outputs.envDATE }}"
+        echo "TDate= ${{ needs.Execute_Versioning.outputs.envTDATE }}"
