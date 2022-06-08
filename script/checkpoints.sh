@@ -17,6 +17,13 @@ targetD=$(curl \
 -H "Accept: application/vnd.github.v3+json" \
 "https://api.github.com/repos/$gUSER/$repo/releases/latest" | jq .created_at)
 
+tag=$(curl \
+-H "Accept: application/vnd.github.v3+json" \
+https://api.github.com/repos/$user/$repo/releases/latest | jq .tag_name)
+
+echo "tag= $tag"
+echo "targetD= $targetD"
+
 echo "::set-output name=LASTCOM::$lastCommit"
 echo "::set-output name=USER::$gUSER"
 echo "::set-output name=envTDATE::$targetD"
