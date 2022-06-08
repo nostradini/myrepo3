@@ -35,99 +35,98 @@ jobs:
 
     - name: Run checkpoints
       id: value
-      shell: bash
       run: |
-        chmod +x ./script/test.sh
-        ./script/test.sh
+        chmod +x ./script/checkpoint.sh
+        ./script/checkpoint.sh
 
-  #   - name: Check current version
-  #     run: |
-  #       ver_str=$(cat "VERSION")
-  #       ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
-  #       echo "Version string is $ver_extract_str"
-  #       cur_major="$(cut -d'.' -f1 <<< "$ver_extract_str")"
-  #       cur_minor="$(cut -d'.' -f2 <<< "$ver_extract_str")"
-  #       cur_patch="$(cut -d'.' -f3 <<< "$ver_extract_str")"
-  #       echo "curmajor=$cur_major" >> $GITHUB_ENV
-  #       echo "curminor=$cur_minor" >> $GITHUB_ENV
-  #       echo "curpatch=$cur_patch" >> $GITHUB_ENV
-  #       echo "lcommit=${{ steps.value.outputs.LASTCOM }}" >> $GITHUB_ENV
-  #       echo "envUSER=${{ steps.value.outputs.USER }}" >> $GITHUB_ENV
-  #       echo "TDate=${{ steps.value.outputs.envTDATE }}" >> $GITHUB_ENV
-  #       echo "OLD= major=$cur_major, minor=$cur_minor, patch=$cur_patch"
+    - name: Check current version
+      run: |
+        ver_str=$(cat "VERSION")
+        ver_extract_str="$(cut -d' ' -f2 <<< "$ver_str")"
+        echo "Version string is $ver_extract_str"
+        cur_major="$(cut -d'.' -f1 <<< "$ver_extract_str")"
+        cur_minor="$(cut -d'.' -f2 <<< "$ver_extract_str")"
+        cur_patch="$(cut -d'.' -f3 <<< "$ver_extract_str")"
+        echo "curmajor=$cur_major" >> $GITHUB_ENV
+        echo "curminor=$cur_minor" >> $GITHUB_ENV
+        echo "curpatch=$cur_patch" >> $GITHUB_ENV
+        echo "lcommit=${{ steps.value.outputs.LASTCOM }}" >> $GITHUB_ENV
+        echo "envUSER=${{ steps.value.outputs.USER }}" >> $GITHUB_ENV
+        echo "TDate=${{ steps.value.outputs.envTDATE }}" >> $GITHUB_ENV
+        echo "OLD= major=$cur_major, minor=$cur_minor, patch=$cur_patch"
 
-  #   - name: Apply logic
-  #     id: logic
-  #     run: |
-  #       echo "TargetDate= $TDate"
-  #       chmod +x ./script/do_logic.sh
-  #       ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDate"
+    - name: Apply logic
+      id: logic
+      run: |
+        echo "TargetDate= $TDate"
+        chmod +x ./script/do_logic.sh
+        ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDate"
 
-  #   - name: Push new version
-  #     run: |
-  #       echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
-  #       # echo "Version=${{ steps.logic.outputs.envVersion }}" >> $GITHUB_ENV
-  #       # echo "Major=${{ steps.logic.outputs.envMajor }}" >> $GITHUB_ENV
-  #       # echo "Minor=${{ steps.logic.outputs.envMinor }}" >> $GITHUB_ENV
-  #       # echo "Patch=${{ steps.logic.outputs.envPatch }}" >> $GITHUB_ENV
-  #       echo "Gitmojiko = ${{ steps.logic.outputs.envgitmojiko }}"
-  #       if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
-  #       then
-  #       chmod +x ./script/version_update.sh
-  #       ./script/version_update.sh $ENV_TOKEN "$envUSER" $REPO
-  #       fi
+    - name: Push new version
+      run: |
+        echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
+        # echo "Version=${{ steps.logic.outputs.envVersion }}" >> $GITHUB_ENV
+        # echo "Major=${{ steps.logic.outputs.envMajor }}" >> $GITHUB_ENV
+        # echo "Minor=${{ steps.logic.outputs.envMinor }}" >> $GITHUB_ENV
+        # echo "Patch=${{ steps.logic.outputs.envPatch }}" >> $GITHUB_ENV
+        echo "Gitmojiko = ${{ steps.logic.outputs.envgitmojiko }}"
+        if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
+        then
+        chmod +x ./script/version_update.sh
+        ./script/version_update.sh $ENV_TOKEN "$envUSER" $REPO
+        fi
          
-  # Create_Release:
-  #  needs: Execute_Versioning
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #   - uses: actions/checkout@v3
-  #     with:
-  #       fetch-depth: 0
-  #   - name: Import values
-  #     run: |
-  #       echo "envUSER=${{ needs.Execute_Versioning.outputs.USER }}" >> $GITHUB_ENV
-  #       echo "Gitmojiko=${{ needs.Execute_Versioning.outputs.envgitmojiko }}" >> $GITHUB_ENV
-  #       echo "Major=${{ needs.Execute_Versioning.outputs.envMajor }}" >> $GITHUB_ENV
-  #       echo "Minor=${{ needs.Execute_Versioning.outputs.envMinor }}" >> $GITHUB_ENV
-  #       echo "Patch=${{ needs.Execute_Versioning.outputs.envPatch }}" >> $GITHUB_ENV
-  #       echo "Version=${{ needs.Execute_Versioning.outputs.envVersion }}" >> $GITHUB_ENV
-  #       echo "Date=${{ needs.Execute_Versioning.outputs.envDATE }}" >> $GITHUB_ENV
-  #       echo "TDate=${{ needs.Execute_Versioning.outputs.envTDATE }}" >> $GITHUB_ENV
+  Create_Release:
+   needs: Execute_Versioning
+   runs-on: ubuntu-latest
+   steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Import values
+      run: |
+        echo "envUSER=${{ needs.Execute_Versioning.outputs.USER }}" >> $GITHUB_ENV
+        echo "Gitmojiko=${{ needs.Execute_Versioning.outputs.envgitmojiko }}" >> $GITHUB_ENV
+        echo "Major=${{ needs.Execute_Versioning.outputs.envMajor }}" >> $GITHUB_ENV
+        echo "Minor=${{ needs.Execute_Versioning.outputs.envMinor }}" >> $GITHUB_ENV
+        echo "Patch=${{ needs.Execute_Versioning.outputs.envPatch }}" >> $GITHUB_ENV
+        echo "Version=${{ needs.Execute_Versioning.outputs.envVersion }}" >> $GITHUB_ENV
+        echo "Date=${{ needs.Execute_Versioning.outputs.envDATE }}" >> $GITHUB_ENV
+        echo "TDate=${{ needs.Execute_Versioning.outputs.envTDATE }}" >> $GITHUB_ENV
 
-  #   - name: Release tagging
-  #     run: |
-  #       # echo "commit count=${{ needs.Execute_Versioning.outputs.COUNTER }}" >> $GITHUB_ENV
-  #       # echo "last commit=${{ needs.Execute_Versioning.outputs.LASTCOM }}" >> $GITHUB_ENV
-  #       echo "Gitmojiko = $Gitmojiko"
-  #       echo "DATE = $Date"
+    - name: Release tagging
+      run: |
+        # echo "commit count=${{ needs.Execute_Versioning.outputs.COUNTER }}" >> $GITHUB_ENV
+        # echo "last commit=${{ needs.Execute_Versioning.outputs.LASTCOM }}" >> $GITHUB_ENV
+        echo "Gitmojiko = $Gitmojiko"
+        echo "DATE = $Date"
 
-  #       if [[ "$Gitmojiko" != "UNRELEASED" ]]
-  #       then 
-  #       chmod +x ./script/releaseNOTES.sh
-  #       ./script/releaseNOTES.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date"
-  #       fi
+        if [[ "$Gitmojiko" != "UNRELEASED" ]]
+        then 
+        chmod +x ./script/releaseNOTES.sh
+        ./script/releaseNOTES.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date"
+        fi
                 
-  #   - name: Create changelog
-  #     run: |
-  #       if [[ "$Gitmojiko" != "UNRELEASED" ]]
-  #       then 
-  #       chmod +x ./script/changeLOG.sh
-  #       ./script/changeLOG.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date" "$TDate"
-  #       fi
-  #       echo "Gitmojiko = $Gitmojiko"
-  #       echo "DATE = $Date"
-  #       echo "TargetDate= $TDate"
+    - name: Create changelog
+      run: |
+        if [[ "$Gitmojiko" != "UNRELEASED" ]]
+        then 
+        chmod +x ./script/changeLOG.sh
+        ./script/changeLOG.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date" "$TDate"
+        fi
+        echo "Gitmojiko = $Gitmojiko"
+        echo "DATE = $Date"
+        echo "TargetDate= $TDate"
  
-  #   - name: TEST VALUE
-  #     run: |
-  #       echo "last commit= ${{ needs.Execute_Versioning.outputs.LASTCOM }}"
-  #       echo "envuser= ${{ needs.Execute_Versioning.outputs.USER }}"
-  #       echo "REPO= $REPO"
-  #       echo "envgitmojiko= ${{ needs.Execute_Versioning.outputs.envgitmojiko }}"
-  #       echo "envMajor= ${{ needs.Execute_Versioning.outputs.envMajor }}"
-  #       echo "envMinor= ${{ needs.Execute_Versioning.outputs.envMinor }}"
-  #       echo "envPatch= ${{ needs.Execute_Versioning.outputs.envPatch }}"
-  #       echo "envVersion= ${{ needs.Execute_Versioning.outputs.envVersion }}"
-  #       echo "Date= ${{ needs.Execute_Versioning.outputs.envDATE }}"
-  #       echo "TDate= ${{ needs.Execute_Versioning.outputs.envDATE }}"
+    - name: TEST VALUE
+      run: |
+        echo "last commit= ${{ needs.Execute_Versioning.outputs.LASTCOM }}"
+        echo "envuser= ${{ needs.Execute_Versioning.outputs.USER }}"
+        echo "REPO= $REPO"
+        echo "envgitmojiko= ${{ needs.Execute_Versioning.outputs.envgitmojiko }}"
+        echo "envMajor= ${{ needs.Execute_Versioning.outputs.envMajor }}"
+        echo "envMinor= ${{ needs.Execute_Versioning.outputs.envMinor }}"
+        echo "envPatch= ${{ needs.Execute_Versioning.outputs.envPatch }}"
+        echo "envVersion= ${{ needs.Execute_Versioning.outputs.envVersion }}"
+        echo "Date= ${{ needs.Execute_Versioning.outputs.envDATE }}"
+        echo "TDate= ${{ needs.Execute_Versioning.outputs.envDATE }}"
