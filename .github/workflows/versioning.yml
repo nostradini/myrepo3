@@ -35,6 +35,7 @@ jobs:
 
     - name: Run checkpoints
       id: value
+      shell: bash
       run: |
         chmod +x ./script/checkpoints.sh
         ./script/checkpoints.sh
