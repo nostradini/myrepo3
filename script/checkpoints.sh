@@ -5,7 +5,6 @@ repo=$REPO
 echo "Last commit = $lastCommit" 
 echo "Git User = $gUSER"
 echo "REPO= $repo"
-
 echo $(date +'%Y-%m-%d')
 echo $(date +'%T')
 # d1="$(date +'%Y-%m-%d')"
@@ -14,18 +13,14 @@ echo $(date +'%T')
 # varDate="$d1-$d2"
 echo "Generated Date= $varDate"
 echo "::set-output name=envDATE::$varDate"
-
 # targetD=$(curl \
 # -H "Accept: application/vnd.github.v3+json" \
 # "https://api.github.com/repos/$gUSER/$repo/releases/latest" | jq .created_at)
-
 # tag=$(curl \
 # -H "Accept: application/vnd.github.v3+json" \
 # https://api.github.com/repos/$user/$repo/releases/latest | jq .tag_name)
-
 echo "tag= $tag"
 echo "targetD= $targetD"
-
 # echo "::set-output name=LASTCOM::$lastCommit"
 # echo "::set-output name=USER::$gUSER"
 # echo "::set-output name=envTDATE::$targetD"
