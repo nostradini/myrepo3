@@ -1,16 +1,16 @@
 name: Versioning
 on:
-  pull_request:
-    branches: [ main ]
-    types: [closed]
-    paths-ignore:
-      - 'VERSION'
-      - 'CHANGELOG.md'
-  # push:
-  #    branches: [main]
-  #    paths-ignore:
-  #    - 'VERSION'
-  #    - 'CHANGELOG.md'
+  # pull_request:
+  #   branches: [ main ]
+  #   types: [closed]
+  #   paths-ignore:
+  #     - 'VERSION'
+  #     - 'CHANGELOG.md'
+  push:
+     branches: [main]
+     paths-ignore:
+     - 'VERSION'
+     - 'CHANGELOG.md'
 
   workflow_dispatch:
 
@@ -81,7 +81,7 @@ jobs:
         ./script/version_update.sh $ENV_TOKEN "$envUSER" $REPO
         fi
          
-  Create_Release:
+  Release_and_Changelog:
    needs: Execute_Versioning
    runs-on: ubuntu-latest
    steps:
