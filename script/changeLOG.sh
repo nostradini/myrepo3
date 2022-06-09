@@ -89,7 +89,7 @@ fi
 newVER="v$newVER"
 path="CHANGELOG.md"
 copyCL=$(cat ./$path)
-# copyCL=$(echo $copyCL | tr -d 'CHANGELOG')
+copyCL=$(echo "$copyCL" | tr -d 'CHANGELOG')
 
 # echo "Updated Version = " $UpdatedVer
 # echo "MjTitle=$MjTitle,MnTitle=$MnTitle,PtTitle=$PtTitle"
