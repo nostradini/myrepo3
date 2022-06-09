@@ -8,9 +8,11 @@ repo=$REPO
 # d2=$(echo $d2 | tr -d ':')
 varDate=$(date -d "-7 hours" "+%Y-%m-%d-%H%M%S")            #"$d1-$d2"
 
-targetD=$(curl \
--H "Accept: application/vnd.github.v3+json" \
-"https://api.github.com/repos/$gUSER/$repo/releases/latest" | jq .created_at)
+# targetD=$(curl \
+# -H "Accept: application/vnd.github.v3+json" \
+# "https://api.github.com/repos/$gUSER/$repo/releases/latest" | jq .created_at)
+
+targetD="2022-05-10T00:00:00Z"
 
 echo "Last commit = $lastCommit" 
 echo "Git User = $gUSER"
