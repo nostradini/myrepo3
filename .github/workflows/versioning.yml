@@ -73,6 +73,7 @@ jobs:
       run: |
         git config --global user.email "${{ env.credential1 }}"
         git config --global user.name "${{ env.credential2 }}"
+        echo "email= ${{ env.credential1 }} , name= ${{ env.credential2 }}"
         # echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
         # echo "Version=${{ steps.logic.outputs.envVersion }}" >> $GITHUB_ENV
         # echo "Major=${{ steps.logic.outputs.envMajor }}" >> $GITHUB_ENV
