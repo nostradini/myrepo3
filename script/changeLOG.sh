@@ -89,7 +89,7 @@ fi
 newVER="v$newVER"
 path="CHANGELOG.md"
 copyCL=$(cat ./$path)
-copyCL=$(echo '$copyC' | sed -e 's/\<h1>CHANGELOG</h1>\>//')                      
+copyCL=$(echo '$copyC' | sed -e 's/<h>CHANGELOG</h1>//')                      
  #$(echo $copyCL | tr -d 'CHANGELOG')
 
 # echo "Updated Version = " $UpdatedVer
