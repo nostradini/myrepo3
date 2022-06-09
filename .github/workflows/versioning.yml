@@ -39,6 +39,9 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+      run: |
+        git config --global user.email "${{ env.credential1 }}"
+        git config --global user.name "${{ env.credential2 }}"
 
     - name: Run checkpoints
       id: value
@@ -71,8 +74,6 @@ jobs:
 
     - name: Push new version
       run: |
-        git config --global user.email "${{ env.credential1 }}"
-        git config --global user.name "${{ env.credential2 }}"
         echo "email= ${{ env.credential1 }} , name= ${{ env.credential2 }}"
         # echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
         # echo "Version=${{ steps.logic.outputs.envVersion }}" >> $GITHUB_ENV
