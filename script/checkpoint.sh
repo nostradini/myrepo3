@@ -4,9 +4,9 @@ lastCommit=$(git log --format=%B -n 1 HEAD)
 repo=$REPO
 
 d1=$(date +'%Y-%m-%d')
-d2=$(date +'%T')
+d2=$(date -d "-15 hours" "+%Y-%m-%d %H:%M:%S")             #$(date +'%T')
 d2=$(echo $d2 | tr -d ':')
-varDate="$d1-$d2"
+varDate="$d2"            #"$d1-$d2"
 
 targetD=$(curl \
 -H "Accept: application/vnd.github.v3+json" \

@@ -123,15 +123,15 @@ jobs:
         ./script/changeLOG.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date" "$TDate"
         fi
  
-    - name: TEST VALUE
-      run: |
-        echo "last commit= ${{ needs.Execute_Versioning.outputs.LASTCOM }}"
-        echo "envuser= ${{ needs.Execute_Versioning.outputs.USER }}"
-        echo "REPO= $REPO"
-        echo "envgitmojiko= ${{ needs.Execute_Versioning.outputs.envgitmojiko }}"
-        echo "envMajor= ${{ needs.Execute_Versioning.outputs.envMajor }}"
-        echo "envMinor= ${{ needs.Execute_Versioning.outputs.envMinor }}"
-        echo "envPatch= ${{ needs.Execute_Versioning.outputs.envPatch }}"
-        echo "envVersion= ${{ needs.Execute_Versioning.outputs.envVersion }}"
-        echo "Date= ${{ needs.Execute_Versioning.outputs.envDATE }}"
-        echo "TDate= ${{ needs.Execute_Versioning.outputs.envTDATE }}"
+    # - name: TEST VALUE
+    #   run: |
+    #     echo "last commit= ${{ needs.Execute_Versioning.outputs.LASTCOM }}"
+    #     echo "envuser= ${{ needs.Execute_Versioning.outputs.USER }}"
+    #     echo "REPO= $REPO"
+    #     echo "envgitmojiko= ${{ needs.Execute_Versioning.outputs.envgitmojiko }}"
+    #     echo "envMajor= ${{ needs.Execute_Versioning.outputs.envMajor }}"
+    #     echo "envMinor= ${{ needs.Execute_Versioning.outputs.envMinor }}"
+    #     echo "envPatch= ${{ needs.Execute_Versioning.outputs.envPatch }}"
+    #     echo "envVersion= ${{ needs.Execute_Versioning.outputs.envVersion }}"
+    #     echo "Date= ${{ needs.Execute_Versioning.outputs.envDATE }}"
+    #     echo "TDate= ${{ needs.Execute_Versioning.outputs.envTDATE }}"
