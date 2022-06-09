@@ -1,1 +1,1 @@
-<h1>CHANGELOG</h1><h2>v3.8.0 - 2022-06-09 002444</h2><h3>:sparkles: New Features</h3> <ul><li><h4>Minor Changes</h4></li> <ul><h5> <li><a href='https://github.com/nostradini/myrepo3/commit/076853d'> 076853d </a> - p5 push #minor change </li></h5></ul></ul>
+<h1>CHANGELOG</h1><h2>v3.9.0 - 2022-06-08 122745</h2><h3>:sparkles: New Features</h3> <ul><li><h4>Minor Changes</h4></li> <ul><h5> <li><a href='https://github.com/nostradini/myrepo3/commit/5207942'> 5207942 </a> - p6 push #minor change </li></h5></ul></ul>
