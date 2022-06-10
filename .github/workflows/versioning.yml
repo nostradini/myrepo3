@@ -72,17 +72,12 @@ jobs:
     - name: Push new version
       run: |
         echo "email= ${{ env.credential1 }} , name= ${{ env.credential2 }}"
-        # echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
-        # echo "Version=${{ steps.logic.outputs.envVersion }}" >> $GITHUB_ENV
-        # echo "Major=${{ steps.logic.outputs.envMajor }}" >> $GITHUB_ENV
-        # echo "Minor=${{ steps.logic.outputs.envMinor }}" >> $GITHUB_ENV
-        # echo "Patch=${{ steps.logic.outputs.envPatch }}" >> $GITHUB_ENV
         echo "Gitmojiko = ${{ steps.logic.outputs.envgitmojiko }}"
-        if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
-        then
+        # if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
+        # then
         chmod +x ./script/version_update.sh
         ./script/version_update.sh $ENV_TOKEN "$envUSER" $REPO
-        fi
+        # fi
          
   Release_and_Changelog:
    needs: Execute_Versioning
@@ -104,11 +99,8 @@ jobs:
 
     - name: Release tagging
       run: |
-        # echo "commit count=${{ needs.Execute_Versioning.outputs.COUNTER }}" >> $GITHUB_ENV
-        # echo "last commit=${{ needs.Execute_Versioning.outputs.LASTCOM }}" >> $GITHUB_ENV
         echo "Gitmojiko = $Gitmojiko"
         echo "DATE = $Date"
-
         if [[ "$Gitmojiko" != "UNRELEASED" ]]
         then 
         chmod +x ./script/releaseNOTES.sh
