@@ -30,8 +30,7 @@ EOF
 # echo "prep data= $(prep_data)"
         # git config --global user.email "${{ env.credential1 }}"
         # git config --global user.name "${{ env.credential2 }}"
-git config user.email "${{ env.credential1 }}"
-git config user.name "${{ env.credential2 }}"
+
 
 curl -i -X PUT \
 -H "Authorization: token $Env_Token" \

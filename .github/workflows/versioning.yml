@@ -73,6 +73,8 @@ jobs:
       run: |
         echo "email= ${{ env.credential1 }} , name= ${{ env.credential2 }}"
         echo "Gitmojiko = ${{ steps.logic.outputs.envgitmojiko }}"
+        git config user.email "${{ env.credential1 }}"
+        git config user.name "${{ env.credential2 }}"
         # if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
         # then
         chmod +x ./script/version_update.sh
