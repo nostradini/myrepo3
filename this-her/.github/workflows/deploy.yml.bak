@@ -1,0 +1,104 @@
+name: Deploy
+
+on:
+  # push:
+  #   branches: [main]
+    
+  workflow_dispatch:
+env:
+  ENV_TOKEN: ${{ secrets.SECRET_TOKEN }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        if: ${{ !env.ACT }}
+        with:
+          fetch-depth: 0
+          
+      - name: Get Next Version
+        id: semver
+        uses: ./action3
+        if: ${{ !env.ACT }}
+        with:
+          token: ${{ github.token }}
+          branch: main
+          
+      - name: Create Draft Release
+        uses: ./action4
+        if: ${{ !env.ACT }}
+        with:
+          prerelease: true
+          draft: false
+          commit: ${{ github.sha }}
+          tag: ${{ steps.semver.outputs.next }}
+          name: ${{ steps.semver.outputs.next }}
+          body: '*pending*'
+          token: ${{ secrets.SECRET_TOKEN }}
+
+      - name: Update CHANGELOG
+        if: ${{ !env.ACT }}
+        id: changelog
+        uses: ./action2
+        with:
+          token: ${{ github.token }}
+          tag: ${{ steps.semver.outputs.next }}
+
+      - name: Create Release
+        if: ${{ !env.ACT }}
+        uses: ./action4
+        with:
+          allowUpdates: true
+          draft: false
+          tag: ${{ steps.semver.outputs.next }}
+          name: ${{ steps.semver.outputs.next }}
+          body: ${{ steps.changelog.outputs.changes }}
+          token: ${{ secrets.SECRET_TOKEN }}
+          
+      - name: Create Release (Major-only)
+        if: ${{ !env.ACT }}
+        uses: ./action4
+        with:
+          allowUpdates: true
+          draft: false
+          commit: ${{ github.sha }}
+          tag: ${{ steps.semver.outputs.nextMajor }}
+          name: ${{ steps.semver.outputs.nextMajor }}
+          body: ${{ steps.changelog.outputs.changes }}
+          token: ${{ secrets.SECRET_TOKEN }}
+
+      - name: Commit CHANGELOG.md
+        if: ${{ !env.ACT }}
+        uses: ./action5
+        with:
+          branch: main
+          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
+          file_pattern: CHANGELOG.md
+          token: $ENV_TOKEN
+
+      - name: Push changes
+        shell: bash
+        run: |
+          chmod +x ./script/Push_CL.sh
+          ./script/Push_CL.sh $ENV_TOKEN
+
+
+
+
+
+      # LOCAL TEST
+
+      #- name: (local) Checkout Code
+        #uses: actions/checkout@v2
+        #if: ${{ env.ACT }}
+        #with:
+          #path: changelog-action
+
+      #- name: (local) Update CHANGELOG
+        #if: ${{ env.ACT }}
+        #uses: ./action2
+        #with:
+          #token: ${{ github.token }}
+          #tag: ${{ env.GITHUB_REF_NAME }}
