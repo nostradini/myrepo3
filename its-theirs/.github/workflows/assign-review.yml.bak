@@ -1,0 +1,15 @@
+name: Assign Review
+
+on:
+  #  pull_request:
+  #    branches: [ main ]
+   workflow_dispatch:
+
+jobs:
+  assign_review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Assign Reviewer
+        uses: ./assign_review
+

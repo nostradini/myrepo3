@@ -1,0 +1,15 @@
+name: Call a workflow
+
+on:
+  - push
+jobs:
+  call-workflow:
+    name: First Step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: nostradini/test_actions@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: my-event
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "task": "CHANGELOG"}'

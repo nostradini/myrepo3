@@ -1,0 +1,31 @@
+name: 'Changelog from Conventional Commits'
+description: 'Generate and update the CHANGELOG from conventional commits since last tag'
+author: Nicolas Giard
+inputs:
+  token:
+    description: GitHub Token
+    required: true
+  tag:
+    description: The latest tag (which triggered this job)
+    required: true
+  excludeTypes:
+    description: Types to exclude from the Changelog
+    required: false
+    default: build,docs,other,style
+  writeToFile:
+    description: Should CHANGELOG.md be updated with latest changelog
+    required: false
+    default: 'true'
+  useGitmojis:
+    description: Prepend type headers with their corresponding gitmoji
+    required: false
+    default: 'true'
+outputs:
+  changelog:
+    description: Generated changelog
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: wind
+  color: red

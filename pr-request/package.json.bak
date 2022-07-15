@@ -1,0 +1,39 @@
+{
+  "name": "changelog-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to generate changelog from conventional commits",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build index.js -o dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Requarks/changelog-action.git"
+  },
+  "keywords": [
+    "changelog",
+    "github-actions",
+    "conventional-commits"
+  ],
+  "author": "Nicolas Giard <github@ngpixel.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Requarks/changelog-action/issues"
+  },
+  "homepage": "https://github.com/Requarks/changelog-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@conventional-commits/parser": "0.4.1",
+    "lodash": "4.17.21",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "0.33.1",
+    "eslint": "8.7.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.0.0"
+  }
+}
