@@ -1,0 +1,21 @@
+name: Check Values
+on:
+   #push:
+    #branches: [ main ]
+  #pull_request:
+    #branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run script
+        run: |
+          echo "!env.ACT - ${{ !env.ACT }}"
+          echo "GITHUB_TOKEN - ${{ env.GITHUB_TOKEN }}"
+          echo "ref_name - ${{ github.ref_name }}"
+          echo "semver.outputs - ${{ steps.semver.outputs.next }}"
