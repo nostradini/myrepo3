@@ -12,7 +12,7 @@ bPatch=false
 bDefault=false
 
 echo "User= $USER , REPO= $repo"
-echo "Date = $targetD"
+echo "Target D = $targetD"
 
 # targetD=$(curl \
 # -H "Accept: application/vnd.github.v3+json" \
