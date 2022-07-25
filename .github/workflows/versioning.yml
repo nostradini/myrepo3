@@ -67,7 +67,7 @@ jobs:
       run: |
         echo "TargetDate= $TDate"
         chmod +x ./script/do_logic.sh
-        ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDATE"
+        ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDate"
 
     - name: Push new version
       run: |
