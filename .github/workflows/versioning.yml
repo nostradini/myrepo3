@@ -59,7 +59,7 @@ jobs:
         echo "curpatch=$cur_patch" >> $GITHUB_ENV
         echo "lcommit=${{ steps.value.outputs.LASTCOM }}" >> $GITHUB_ENV
         echo "envUSER=${{ steps.value.outputs.USER }}" >> $GITHUB_ENV
-        echo "TDate=${{ steps.value.outputs.envTDATE }}" >> $GITHUB_ENV
+        # echo "TDate=${{ steps.value.outputs.envTDATE }}" >> $GITHUB_ENV
         echo "OLD= major=$cur_major, minor=$cur_minor, patch=$cur_patch"
 
     - name: Apply logic
@@ -67,7 +67,7 @@ jobs:
       run: |
         echo "TargetDate= $TDate"
         chmod +x ./script/do_logic.sh
-        ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDate"
+        ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$envTDATE"
 
     - name: Push new version
       run: |
