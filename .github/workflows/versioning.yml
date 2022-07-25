@@ -81,8 +81,8 @@ jobs:
         then
         chmod +x ./script/version_update.sh
         ./script/version_update.sh $ENV_TOKEN "$envUSER" $REPO
-        elif
-        echo "UNRELEASED Mergers"
+        else
+        echo "UNRELEASED Merge"
         fi
          
   Release_and_Changelog:
@@ -111,8 +111,8 @@ jobs:
         then 
         chmod +x ./script/releaseNOTES.sh
         ./script/releaseNOTES.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date"
-        elif
-        echo "UNRELEASED Mergers"
+        else
+        echo "UNRELEASED Merge"
         fi
                 
     - name: Create changelog
@@ -124,8 +124,8 @@ jobs:
         then 
         chmod +x ./script/changeLOG.sh
         ./script/changeLOG.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date" "$TDate"
-        elif
-        echo "UNRELEASED Mergers"
+        else
+        echo "UNRELEASED Merge"
         fi
  
     # - name: TEST VALUE
