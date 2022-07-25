@@ -68,7 +68,7 @@ jobs:
         echo "TargetDate= $TDate"
         chmod +x ./script/do_logic.sh
         ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDate"
-        echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" >> $GITHUB_ENV
+        echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" #>> $GITHUB_ENV
 
     - name: Push new version
       run: |
@@ -81,6 +81,8 @@ jobs:
         then
         chmod +x ./script/version_update.sh
         ./script/version_update.sh $ENV_TOKEN "$envUSER" $REPO
+        elif
+        echo "UNRELEASED Mergers"
         fi
          
   Release_and_Changelog:
@@ -109,6 +111,8 @@ jobs:
         then 
         chmod +x ./script/releaseNOTES.sh
         ./script/releaseNOTES.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date"
+        elif
+        echo "UNRELEASED Mergers"
         fi
                 
     - name: Create changelog
@@ -120,6 +124,8 @@ jobs:
         then 
         chmod +x ./script/changeLOG.sh
         ./script/changeLOG.sh "$Gitmojiko" "$Version" "$Major" "$Minor" "$Patch" "$envUSER" $REPO "$Date" "$TDate"
+        elif
+        echo "UNRELEASED Mergers"
         fi
  
     # - name: TEST VALUE
