@@ -59,7 +59,7 @@ jobs:
         echo "curpatch=$cur_patch" >> $GITHUB_ENV
         echo "lcommit=${{ steps.value.outputs.LASTCOM }}" >> $GITHUB_ENV
         echo "envUSER=${{ steps.value.outputs.USER }}" >> $GITHUB_ENV
-        # echo "TDate=${{ steps.value.outputs.envTDATE }}" >> $GITHUB_ENV
+        echo "TDate=${{ steps.value.outputs.envTDATE }}" >> $GITHUB_ENV
         echo "OLD= major=$cur_major, minor=$cur_minor, patch=$cur_patch"
 
     - name: Apply logic
@@ -67,7 +67,7 @@ jobs:
       run: |
         echo "TargetDate= $TDate"
         chmod +x ./script/do_logic.sh
-        ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$envTDATE"
+        ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDATE"
 
     - name: Push new version
       run: |
@@ -75,11 +75,11 @@ jobs:
         echo "Gitmojiko = ${{ steps.logic.outputs.envgitmojiko }}"
         git config user.email "${{ env.credential1 }}"
         git config user.name "${{ env.credential2 }}"
-        # if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
-        # then
+        if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
+        then
         chmod +x ./script/version_update.sh
         ./script/version_update.sh $ENV_TOKEN "$envUSER" $REPO
-        # fi
+        fi
          
   Release_and_Changelog:
    needs: Execute_Versioning
