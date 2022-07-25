@@ -68,13 +68,11 @@ jobs:
         echo "TargetDate= $TDate"
         chmod +x ./script/do_logic.sh
         ./script/do_logic.sh $curmajor $curminor $curpatch "$envUSER" "$lcommit" $REPO "$TDate"
-        echo "Gitmojiko=${{ steps.logic.outputs.envgitmojiko }}" #>> $GITHUB_ENV
 
     - name: Push new version
       run: |
-        echo "email= ${{ env.credential1 }} , name= ${{ env.credential2 }}"
-        # echo "Gitmojiko = ${{ steps.logic.outputs.envgitmojiko }}"
-        echo "Gitmojiko = $Gitmojiko"
+        # echo "email= ${{ env.credential1 }} , name= ${{ env.credential2 }}"
+        echo "Gitmojiko = ${{ steps.logic.outputs.envgitmojiko }}"
         # git config user.email "${{ env.credential1 }}"
         # git config user.name "${{ env.credential2 }}"
         if [[ "${{ steps.logic.outputs.envgitmojiko }}" != "UNRELEASED" ]]
